@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const pingRoutes = require('./routes/ping');
 
 const app = express();
 
@@ -9,26 +10,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use((req, res, next) => {
-    // for CORS
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-with, Content-Type, Accept, Authorization"
-    );
-    // for allowed methods
-    // OPTIONS is set implicitely by angular to check if
-    // post request is valid
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, PATCH, PUT, DELETE, OPTIONS"
-    );
-    next();
-  });
-
-app.get('/ping', (req, res) => {
-  res.status(200).json({
-    message: "Pong"
-  });
+  // for CORS
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-with, Content-Type, Accept, Authorization"
+  );
+  // for allowed methods
+  // OPTIONS is set implicitely by angular to check if
+  // post request is valid
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+  );
+  next();
 });
+
+app.use('/api/ping', pingRoutes);
 
 module.exports = app;
