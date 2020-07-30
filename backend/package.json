@@ -1,0 +1,20 @@
+{
+  "name": "wedding-planner-backend",
+  "version": "1.0.0",
+  "description": "This is the back end for the wedding planner app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:server": "nodemon ./server.js"
+  },
+  "author": "Team #75 SPS India",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "debug": "^4.1.1",
+    "nodemon": "^2.0.4"
+  }
+}
