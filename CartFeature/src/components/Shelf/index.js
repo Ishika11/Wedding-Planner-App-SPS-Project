@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { fetchProducts } from '../../services/shelf/actions';
+import { addProduct } from '../../services/cart/actions';
 
+import Clearfix from '../Clearfix';
 import Spinner from '../Spinner';
 import ShelfHeader from './ShelfHeader';
 import ProductList from './ProductList';
