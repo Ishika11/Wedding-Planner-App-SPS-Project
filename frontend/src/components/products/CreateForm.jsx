@@ -58,6 +58,7 @@ const MenuProps = {
 
 const CreateProduct = () => {
   const classes = useStyles();
+  let fileInputElement;
 
   const [values, setValues] = useState({
     category: "",
@@ -205,10 +206,22 @@ const CreateProduct = () => {
           </div>
 
           <div>
-            Select images to showcase your service
             <FormControl>
-              <input type="file" multiple onChange={handleFilesChange} />
+              <input
+                type="file"
+                ref={(fileInput) => (fileInputElement = fileInput)}
+                multiple
+                hidden
+                onChange={handleFilesChange}
+              />
             </FormControl>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => fileInputElement.click()}
+            >
+              Add Images
+            </Button>
           </div>
 
           <div>
