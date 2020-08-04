@@ -16,7 +16,7 @@ const compare = {
 
 export const fetchProducts = (filters, sortBy, callback) => dispatch => {
   return axios
-    .get('/products.json')
+    .get('https://my-json-server.typicode.com/Ishika11/test/db')
     .then(res => {
       let { products } = res.data;
 

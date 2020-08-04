@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Shelf from '../Shelf';
-import Filter from '../Shelf/Filter';
 import FloatCart from '../FloatCart';
 
-const App = () => (
-  <React.Fragment>
-    <main>
-      <Shelf />
-    </main>
-    <FloatCart />
-  </React.Fragment>
-);
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <main>
+          <Shelf />
+        </main>
+        <FloatCart />
+      </div>
+    );
+  }
+}
 
 export default App;

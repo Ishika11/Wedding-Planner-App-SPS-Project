@@ -1,41 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { connect } from 'react-redux';
-import { updateSort } from '../../../services/sort/actions';
-import Selectbox from '../../Selectbox';
+import Clearfix from '../../Clearfix';
 
-const sortBy = [
-  { value: '', label: 'Select' },
-  { value: 'lowestprice', label: 'Lowest to highest' },
-  { value: 'highestprice', label: 'Highest to lowest' }
-];
+const ShelfHeader = props => {
+  return (
+    <div className="shelf-container-header">
+      <small className="products-found">
+        <span>{props.productsLength} Product(s) found.</span>
+      </small>
 
-class Sort extends Component {
-  static propTypes = {
-    updateSort: PropTypes.func.isRequired,
-    sort: PropTypes.string.isRequired
-  };
+      <Clearfix />
+    </div>
+  );
+};
 
-  handleSort = value => {
-    this.props.updateSort(value);
-  };
+ShelfHeader.propTypes = {
+  productsLength: PropTypes.number.isRequired
+};
 
-  render() {
-    return (
-      <div className="sort">
-        Order by
-        <Selectbox options={sortBy} handleOnChange={this.handleSort} />
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = state => ({
-  sort: state.sort.type
-});
-
-export default connect(
-  mapStateToProps,
-  { updateSort }
-)(Sort);
+export default ShelfHeader;

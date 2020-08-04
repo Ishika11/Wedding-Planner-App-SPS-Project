@@ -1,16 +1,15 @@
-//add product
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import Thumb from '../../../Thumb';
-import { formatPrice } from '../../../../services/util';
-import { addProduct } from '../../../../services/cart/actions';
+import Thumb from '../../Thumb';
+import util from '../../../services/util';
 
-const Product = ({ product, addProduct }) => {
+const Product = props => {
+  const product = props.product;
+
   product.quantity = 1;
 
-  let formattedPrice = formatPrice(product.price, product.currencyId);
+  let formattedPrice = util.formatPrice(product.price, product.currencyId);
 
   let productInstallment;
 
@@ -21,8 +20,9 @@ const Product = ({ product, addProduct }) => {
       <div className="installment">
         <span>or {product.installments} x</span>
         <b>
-          {product.currencyFormat}
-          {formatPrice(installmentPrice, product.currencyId)}
+          {' '}
+          {product.currencyFormat}{' '}
+          {util.formatPrice(installmentPrice, product.currencyId)}
         </b>
       </div>
     );
@@ -31,12 +31,12 @@ const Product = ({ product, addProduct }) => {
   return (
     <div
       className="shelf-item"
-      onClick={() => addProduct(product)}
+      onClick={() => props.addProduct(product)}
       data-sku={product.sku}
     >
       <Thumb
         classes="shelf-item__thumb"
-        src={require(`../../../../static/products/${product.sku}_2.jpg`)}
+        src={require(`../../../static/products/${product.sku}_1.jpg`)}
         alt={product.title}
       />
       <p className="shelf-item__title">{product.title}</p>
@@ -46,7 +46,6 @@ const Product = ({ product, addProduct }) => {
           <b>{formattedPrice.substr(0, formattedPrice.length - 3)}</b>
           <span>{formattedPrice.substr(formattedPrice.length - 3, 3)}</span>
         </div>
-       
       </div>
       <div className="shelf-item__buy-btn">Add to cart</div>
     </div>
@@ -58,7 +57,4 @@ Product.propTypes = {
   addProduct: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  { addProduct }
-)(Product);
+export default Product;

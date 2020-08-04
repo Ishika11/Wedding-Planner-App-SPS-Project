@@ -21,7 +21,7 @@ export const updateCart = cartProducts => dispatch => {
     installments,
     totalPrice,
     currencyId: 'USD',
-    currencyFormat: '$'
+    currencyFormat: 'INR'
   };
 
   dispatch({
