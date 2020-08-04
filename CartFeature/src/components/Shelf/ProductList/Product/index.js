@@ -34,12 +34,9 @@ const Product = ({ product, addProduct }) => {
       onClick={() => addProduct(product)}
       data-sku={product.sku}
     >
-      {product.isFreeShipping && (
-        <div className="shelf-stopper">Free shipping</div>
-      )}
       <Thumb
         classes="shelf-item__thumb"
-        src={require(`../../../../static/products/${product.sku}_1.jpg`)}
+        src={require(`../../../../static/products/${product.sku}_2.jpg`)}
         alt={product.title}
       />
       <p className="shelf-item__title">{product.title}</p>
