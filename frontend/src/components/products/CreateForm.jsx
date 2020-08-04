@@ -67,17 +67,28 @@ const CreateProduct = () => {
     description: "",
     contactNumber: "",
     locations: [],
+    images: [],
   });
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+  const handleFilesChange = (event) => {
+    setValues({ ...values, images: event.target.files });
+    console.log(values.images);
+  };
+
   return (
     <Card>
       <CardContent>
         <h1>Describe your Service</h1>
-        <form>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            console.log(values);
+          }}
+        >
           <div>
             Select Category
             <FormControl className={classes.formControl}>
@@ -185,15 +196,18 @@ const CreateProduct = () => {
                 MenuProps={MenuProps}
               >
                 {locations.map((locationName) => (
-                  <MenuItem
-                    key={locationName}
-                    value={locationName}
-                    // style={getStyles(name, personName, theme)}
-                  >
+                  <MenuItem key={locationName} value={locationName}>
                     {locationName}
                   </MenuItem>
                 ))}
               </Select>
+            </FormControl>
+          </div>
+
+          <div>
+            Select images to showcase your service
+            <FormControl>
+              <input type="file" multiple onChange={handleFilesChange} />
             </FormControl>
           </div>
 
