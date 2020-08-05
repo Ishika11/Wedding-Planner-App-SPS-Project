@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: 150,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -101,9 +101,8 @@ const CreateProduct = () => {
           }}
         >
           <div>
-            Select Category
             <FormControl className={classes.formControl}>
-              <InputLabel id="category-label">Category</InputLabel>
+              <InputLabel id="category-label">Service Category</InputLabel>
               <Select
                 labelId="category-label"
                 id="category"
@@ -121,32 +120,29 @@ const CreateProduct = () => {
           </div>
 
           <div>
-            Decide a name
             <TextField
               required
               id="name-field"
-              label="Name"
+              label="Name your Service"
               value={values.name}
               onChange={handleChange("name")}
             />
           </div>
 
           <div>
-            Provide a unit of mesurement for cost estimate
             <TextField
               required
               id="estimate-unit-field"
-              label="Estimate Unit"
+              label="Unit of measurement"
               value={values.estimateUnit}
               onChange={handleChange("estimateUnit")}
             />
           </div>
 
           <div>
-            Provide a cost estimate per unit in Rupees
             <FormControl className={classes.margin}>
               <InputLabel htmlFor="standard-adornment-amount">
-                Amount
+                Cost per unit
               </InputLabel>
               <Input
                 id="price-estimate-field"
@@ -160,7 +156,6 @@ const CreateProduct = () => {
           </div>
 
           <div>
-            Provide a description
             <TextField
               required
               id="description-field"
@@ -172,20 +167,18 @@ const CreateProduct = () => {
           </div>
 
           <div>
-            Contact number
             <TextField
               required
               id="contact-field"
-              label="Contact"
+              label="Contact number"
               value={values.contactNumber}
               onChange={handleChange("contactNumber")}
             />
           </div>
 
           <div>
-            Select locations to provide service
             <FormControl className={classes.formControl}>
-              <InputLabel id="location-label">Chip</InputLabel>
+              <InputLabel id="location-label">Service Locations</InputLabel>
               <Select
                 labelId="location-label"
                 id="mutiple-location"
