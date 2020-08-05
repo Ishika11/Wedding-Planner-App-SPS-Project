@@ -11,8 +11,18 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Input from "@material-ui/core/Input";
 import Chip from "@material-ui/core/Chip";
+import ImagesPreview from "./ImagesPreview";
 
 const useStyles = makeStyles((theme) => ({
+  image: {
+    width: 128,
+    height: 128,
+  },
+  img: {
+    margin: "auto",
+    maxWidth: "100%",
+    maxHeight: "100%",
+  },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -68,16 +78,16 @@ const CreateProduct = () => {
     description: "",
     contactNumber: "",
     locations: [],
-    images: [],
   });
+
+  const [images, setImages] = useState([]);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
   const handleFilesChange = (event) => {
-    setValues({ ...values, images: event.target.files });
-    console.log(values.images);
+    setImages([...event.target.files]);
   };
 
   return (
@@ -205,10 +215,13 @@ const CreateProduct = () => {
             </FormControl>
           </div>
 
+          <ImagesPreview images={images} />
+
           <div>
             <FormControl>
               <input
                 type="file"
+                accept="image/*"
                 ref={(fileInput) => (fileInputElement = fileInput)}
                 multiple
                 hidden
