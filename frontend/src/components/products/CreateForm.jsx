@@ -13,16 +13,7 @@ import Chip from "@material-ui/core/Chip";
 import ImagesPreview from "./ImagesPreview";
 import { Grid, Container } from "@material-ui/core";
 import "./CreateForm.css";
-
-const categories = ["Entertainment", "Caterer", "Venue", "Clothes", "Gifts"];
-const locations = [
-  "Delhi",
-  "Mumbai",
-  "Bangalore",
-  "Kolkata",
-  "Chandigarh",
-  "Goa",
-];
+import { LOCATIONS, CATEGORIES } from "./constatnts";
 
 const CreateProduct = () => {
   let fileInputElement;
@@ -72,7 +63,7 @@ const CreateProduct = () => {
                       onChange={handleChange("category")}
                       label="Category"
                     >
-                      {categories.map((category) => (
+                      {CATEGORIES.map((category) => (
                         <MenuItem key={category} value={category}>
                           {category}
                         </MenuItem>
@@ -167,7 +158,7 @@ const CreateProduct = () => {
                         </div>
                       )}
                     >
-                      {locations.map((locationName) => (
+                      {LOCATIONS.map((locationName) => (
                         <MenuItem key={locationName} value={locationName}>
                           {locationName}
                         </MenuItem>
