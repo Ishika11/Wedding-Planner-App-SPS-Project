@@ -167,7 +167,9 @@ const CreateProduct = () => {
                   </FormControl>
                 </div>
 
-                <ImagesPreview images={images} />
+                <div className="form-row">
+                  <ImagesPreview images={images} />
+                </div>
 
                 <div className="form-row">
                   <FormControl fullWidth>

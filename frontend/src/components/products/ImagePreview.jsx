@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./ImagePreview.css";
 
 const ImagePreview = (props) => {
   const [previewURL, setPreviewURL] = useState("");
