@@ -13,7 +13,7 @@ import Chip from "@material-ui/core/Chip";
 import ImagesPreview from "./ImagesPreview";
 import { Grid, Container } from "@material-ui/core";
 import "./CreateForm.css";
-import { LOCATIONS, CATEGORIES } from "./constatnts";
+import { LOCATIONS, CATEGORIES } from "./constants";
 
 const CreateProduct = () => {
   let fileInputElement;
