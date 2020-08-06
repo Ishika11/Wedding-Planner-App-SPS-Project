@@ -1,0 +1,19 @@
+.form-row {
+  margin-top: 2rem;
+}
+
+.chips {
+  display: "flex";
+}
+
+.chip {
+  margin: 2;
+}
+
+.center {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
