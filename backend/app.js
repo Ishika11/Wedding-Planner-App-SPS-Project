@@ -1,13 +1,14 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const pingRoutes = require('./routes/ping');
+const express = require("express");
+const bodyParser = require("body-parser");
+const pingRoutes = require("./routes/ping");
+const serviceRoutes = require("./routes/service");
 
 const app = express();
 
 // for parsing json data, body is stream of bits initially
 app.use(bodyParser.json());
 // not used here, but you can parse urlencoded data too
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
   // for CORS
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/ping', pingRoutes);
+app.use("/api/ping", pingRoutes);
+app.use("/api/service", serviceRoutes);
 
 module.exports = app;

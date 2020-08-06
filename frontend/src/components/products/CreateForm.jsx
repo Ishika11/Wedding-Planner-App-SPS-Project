@@ -14,6 +14,7 @@ import ImagesPreview from "./ImagesPreview";
 import { Grid, Container } from "@material-ui/core";
 import "./CreateForm.css";
 import { LOCATIONS, CATEGORIES } from "./constants";
+import { addService } from "../../actions/service";
 
 const CreateProduct = () => {
   let fileInputElement;
@@ -38,6 +39,25 @@ const CreateProduct = () => {
     setImages([...event.target.files]);
   };
 
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("category", values.category);
+    formData.append("name", values.name);
+    formData.append("estimateUnit", values.estimateUnit);
+    formData.append("priceEstimate", values.priceEstimate);
+    formData.append("description", values.description);
+    formData.append("contactNumber", values.contactNumber);
+    formData.append("locations", values.locations);
+
+    for (let i = 0; i < images.length; ++i) {
+      formData.append("images", images[i]);
+    }
+
+    const result = await addService(formData);
+    console.log(result);
+  };
+
   return (
     <Container>
       <Card>
@@ -45,12 +65,7 @@ const CreateProduct = () => {
           <Container>
             <CardContent>
               <h1>Describe your Service</h1>
-              <form
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  console.log(values);
-                }}
-              >
+              <form onSubmit={handleFormSubmit}>
                 <div className="form-row">
                   <FormControl fullWidth className="form-control">
                     <InputLabel id="category-label">
