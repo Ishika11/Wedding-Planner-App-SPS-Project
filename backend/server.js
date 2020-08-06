@@ -1,5 +1,6 @@
 const app = require("./app");
 const http = require("http");
+const { Sequelize } = require("sequelize");
 
 const normalizePort = (val) => {
   var port = parseInt(val, 10);
@@ -48,3 +49,18 @@ const server = http.createServer(app);
 server.on("error", onError);
 server.on("listening", onListening);
 server.listen(port);
+
+const sequelize = new Sequelize(
+  `mysql://root:${process.env.DB_PASSWORD}@34.93.213.92:3306/wedding_planner`
+);
+
+const connectDB = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+};
+
+connectDB();
