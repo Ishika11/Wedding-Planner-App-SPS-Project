@@ -1,6 +1,5 @@
 {
   "env": {
-    "PORT": "4000",
-    "DB_PASSWORD": "8Cwt7OOsOBo9k4n6"
+    "PORT": "4000"
   }
 }
