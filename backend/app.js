@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const pingRoutes = require('./routes/ping');
+const index = require('./routes/index');
+var cors = require('cors');
 
 const app = express();
 
@@ -26,6 +28,15 @@ app.use((req, res, next) => {
   next();
 });
 
+var corsOption = {
+  origin: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  exposedHeaders: ['x-auth-token']
+};
+app.use(cors(corsOption));
+
 app.use('/api/ping', pingRoutes);
+app.use('/api/v1', index);
 
 module.exports = app;
