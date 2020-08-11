@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import TwitterLogin from 'react-twitter-auth';
-// import FacebookLogin from 'react-facebook-login';
+import TwitterLogin from 'react-twitter-auth';
+import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 
 import Button from '@material-ui/core/Button';
@@ -47,32 +47,32 @@ class Auth extends Component {
         alert(error);
     };
 
-    // twitterResponse = (response) => {
-    //     const token = response.headers.get('x-auth-token');
-    //     response.json().then(user => {
-    //         if (token) {
-    //             this.setState({ isAuthenticated: true, user, token, open: false });
-    //         }
-    //     });
-    // };
+    twitterResponse = (response) => {
+        const token = response.headers.get('x-auth-token');
+        response.json().then(user => {
+            if (token) {
+                this.setState({ isAuthenticated: true, user, token, open: false }, this.setLocalState);
+            }
+        });
+    };
 
-    // facebookResponse = (response) => {
-    //     const tokenBlob = new Blob([JSON.stringify({ access_token: response.accessToken }, null, 2)], { type: 'application/json' });
-    //     const options = {
-    //         method: 'POST',
-    //         body: tokenBlob,
-    //         mode: 'cors',
-    //         cache: 'default'
-    //     };
-    //     fetch('http://localhost:4000/api/v1/auth/facebook', options).then(r => {
-    //         const token = r.headers.get('x-auth-token');
-    //         r.json().then(user => {
-    //             if (token) {
-    //                 this.setState({ isAuthenticated: true, user, token, open: false })
-    //             }
-    //         });
-    //     })
-    // };
+    facebookResponse = (response) => {
+        const tokenBlob = new Blob([JSON.stringify({ access_token: response.accessToken }, null, 2)], { type: 'application/json' });
+        const options = {
+            method: 'POST',
+            body: tokenBlob,
+            mode: 'cors',
+            cache: 'default'
+        };
+        fetch('http://localhost:4000/api/v1/auth/facebook', options).then(r => {
+            const token = r.headers.get('x-auth-token');
+            r.json().then(user => {
+                if (token) {
+                    this.setState({ isAuthenticated: true, user, token, open: false }, this.setLocalState);
+                }
+            });
+        })
+    };
 
     googleResponse = (response) => {
         const tokenBlob = new Blob([JSON.stringify({ access_token: response.accessToken }, null, 2)], { type: 'application/json' });
@@ -106,7 +106,11 @@ class Auth extends Component {
 
     render() {
         const { classes } = this.props;
-        console.log(this.state);
+        var buttonSize = {
+            display: "block",
+            width: "100%",
+            height: "10px"
+        }
         let content = !!this.state.isAuthenticated ?
             (
                 <div style ={{display: 'flex'}}>
@@ -137,18 +141,27 @@ class Auth extends Component {
                         <Fade in={this.state.open}>
                             <div className={classes.paper}>
                                 <h2>Sign In</h2>
-                                <div>
-                                    {/* <TwitterLogin loginUrl="http://localhost:4000/api/v1/auth/twitter"
-                                        onFailure={this.onFailure} onSuccess={this.twitterResponse}
-                                        requestTokenUrl="http://localhost:4000/api/v1/auth/twitter/reverse" />
-                                    <FacebookLogin
+                                <div style={{textAlign: "center"}}>
+                                    <TwitterLogin style={buttonSize}
+                                        loginUrl="http://localhost:4000/api/v1/auth/twitter"
+                                        onFailure={this.onFailure} 
+                                        onSuccess={this.twitterResponse}
+                                        requestTokenUrl="http://localhost:4000/api/v1/auth/twitter/reverse"
+                                        showIcon={true} >
+                                    </TwitterLogin>
+                                    <br></br>
+                                    <div >
+                                    <FacebookLogin style={buttonSize}
                                         appId={config.FACEBOOK_APP_ID}
                                         autoLoad={false}
                                         fields="name,email,picture"
-                                        callback={this.facebookResponse} /> */}
-                                    <GoogleLogin
+                                        callback={this.facebookResponse} 
+                                    />
+                                    </div>
+                                    <br></br> 
+                                    <GoogleLogin style={buttonSize}
                                         clientId={config.GOOGLE_CLIENT_ID}
-                                        buttonText="Login"
+                                        buttonText="Sign in with Google"
                                         onSuccess={this.googleResponse}
                                         onFailure={this.onFailure}
                                     />
