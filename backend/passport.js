@@ -14,7 +14,7 @@ module.exports = function () {
             includeEmail: true
         },
         function (token, tokenSecret, profile, done) {
-            console.log(profile);
+            // console.log(profile);
             var newUser = {
                 email: profile.emails[0].value,
                 twitterProvider: {
@@ -32,7 +32,7 @@ module.exports = function () {
             clientSecret: config.facebookAuth.clientSecret
         },
         function (accessToken, refreshToken, profile, done) {
-            console.log(profile);
+            // console.log(profile);
             var newUser = {
                 fullName: profile.displayName,
                 email: profile.emails[0].value,

@@ -9,10 +9,18 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import ExitToApp from '@material-ui/icons/ExitToApp';
+import VpnKey from '@material-ui/icons/VpnKey';
 
 var config = require('./config.js');
 
 const useStyles = theme => ({
+    root: {
+        display: 'flex',
+        '& > *': {
+            margin: theme.spacing(1),
+        },
+    },
     modal: {
         display: 'flex',
         alignItems: 'center',
@@ -23,6 +31,9 @@ const useStyles = theme => ({
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
+    },
+    button: {
+        marginLeft: theme.spacing(1),
     },
 });
 
@@ -92,8 +103,8 @@ class Auth extends Component {
         })
     };
 
-    setOpen = (val) =>{
-        this.setState({open: val}, this.setLocalState);
+    setOpen = (val) => {
+        this.setState({ open: val }, this.setLocalState);
     };
 
     handleOpen = () => {
@@ -109,20 +120,33 @@ class Auth extends Component {
         var buttonSize = {
             display: "block",
             width: "100%",
-            height: "10px"
+            height: "100%",
+            marginTop: "10px"
         }
         let content = !!this.state.isAuthenticated ?
             (
-                <div style ={{display: 'flex'}}>
-                    <Button variant="outlined" size="small" color="secondary" onClick={this.logout}>
+                <div className={classes.root}>
+                    <Avatar alt={this.state.user.fullName} src={this.state.user.picture} />
+                    <Button
+                        color="inherit"
+                        size="small"
+                        className={classes.button}
+                        startIcon={<ExitToApp />}
+                        onClick={this.logout}
+                    >
                         Log out
                     </Button>
-                    <Avatar alt={this.state.user.fullName} src={this.state.user.picture} />
                 </div>
             ) :
             (
-                <div>
-                    <Button variant="outlined" color="primary" onClick={this.handleOpen}>
+                <div className={classes.root}>
+                    <Button
+                        color="inherit"
+                        size="small"
+                        className={classes.button}
+                        startIcon={<VpnKey />}
+                        onClick={this.handleOpen}
+                    >
                         Sign In
                     </Button>
 
@@ -141,24 +165,24 @@ class Auth extends Component {
                         <Fade in={this.state.open}>
                             <div className={classes.paper}>
                                 <h2>Sign In</h2>
-                                <div style={{textAlign: "center"}}>
+                                <div style={{ textAlign: "center" }}>
                                     <TwitterLogin style={buttonSize}
                                         loginUrl="http://localhost:4000/api/v1/auth/twitter"
-                                        onFailure={this.onFailure} 
+                                        onFailure={this.onFailure}
                                         onSuccess={this.twitterResponse}
                                         requestTokenUrl="http://localhost:4000/api/v1/auth/twitter/reverse"
                                         showIcon={true} >
                                     </TwitterLogin>
                                     <br></br>
                                     <div >
-                                    <FacebookLogin style={buttonSize}
-                                        appId={config.FACEBOOK_APP_ID}
-                                        autoLoad={false}
-                                        fields="name,email,picture"
-                                        callback={this.facebookResponse} 
-                                    />
+                                        <FacebookLogin style={buttonSize}
+                                            appId={config.FACEBOOK_APP_ID}
+                                            autoLoad={false}
+                                            fields="name,email,picture"
+                                            callback={this.facebookResponse}
+                                        />
                                     </div>
-                                    <br></br> 
+                                    <br></br>
                                     <GoogleLogin style={buttonSize}
                                         clientId={config.GOOGLE_CLIENT_ID}
                                         buttonText="Sign in with Google"
