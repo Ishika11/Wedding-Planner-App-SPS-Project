@@ -20,6 +20,7 @@ const useStyles = theme => ({
         '& > *': {
             margin: theme.spacing(1),
         },
+        fontFamily: 'Open Sans'
     },
     modal: {
         display: 'flex',
@@ -34,6 +35,7 @@ const useStyles = theme => ({
     },
     button: {
         marginLeft: theme.spacing(1),
+        fontFamily: 'Averia Sans Libre, cursive',
     },
 });
 
@@ -128,8 +130,9 @@ class Auth extends Component {
                 <div className={classes.root}>
                     <Avatar alt={this.state.user.fullName} src={this.state.user.picture} />
                     <Button
-                        color="inherit"
-                        size="small"
+                        color="secondary"
+                        variant="contained"
+                        size="x-large"
                         className={classes.button}
                         startIcon={<ExitToApp />}
                         onClick={this.logout}
@@ -142,7 +145,7 @@ class Auth extends Component {
                 <div className={classes.root}>
                     <Button
                         color="inherit"
-                        size="small"
+                        size="x-large"
                         className={classes.button}
                         startIcon={<VpnKey />}
                         onClick={this.handleOpen}
@@ -164,7 +167,7 @@ class Auth extends Component {
                     >
                         <Fade in={this.state.open}>
                             <div className={classes.paper}>
-                                <h2>Sign In</h2>
+                                <h2 style={{fontFamily: "Open Sans"}}>Sign In</h2>
                                 <div style={{ textAlign: "center" }}>
                                     <TwitterLogin style={buttonSize}
                                         loginUrl="http://localhost:4000/api/v1/auth/twitter"

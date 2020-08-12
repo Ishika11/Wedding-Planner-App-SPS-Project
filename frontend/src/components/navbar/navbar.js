@@ -18,23 +18,11 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
+        fontFamily: 'Kalam, cursive',
     },
     button: {
         margin: theme.spacing(1),
-    },
-    typography: {
-        fontFamily: [
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
-        ].join(','),
+        fontFamily: 'Averia Sans Libre, cursive',
     },
 }));
 
@@ -46,14 +34,15 @@ export default function Navbar() {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="h6" className={[classes.title, "appName"].join(' ')}>
-                        Wedding Planner
+                    <Typography variant="h4" className={classes.title}>
+                        EaseMyशादी
                     </Typography>
 
                     <Button
                         color="inherit"
                         className={classes.button}
                         startIcon={<AddBox />}
+                        size="x-large"
                     >
                         Services
                     </Button>
@@ -62,6 +51,7 @@ export default function Navbar() {
                         color="inherit"
                         className={classes.button}
                         startIcon={<ShoppingCart />}
+                        size="x-large"
                     >
                         Cart
                     </Button>
