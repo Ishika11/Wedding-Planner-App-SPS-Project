@@ -41,7 +41,7 @@ class CartProduct extends Component {
         />
         <Thumb
           classes="shelf-item__thumb"
-          src={require(`../../../static/products/${product.sku}_1.jpg`)}
+          src={product.img_link}
           alt={product.title}
         />
         <div className="shelf-item__details">
