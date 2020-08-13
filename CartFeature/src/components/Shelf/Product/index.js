@@ -36,7 +36,7 @@ const Product = props => {
     >
       <Thumb
         classes="shelf-item__thumb"
-        src={require(`../../../static/products/${product.sku}_1.jpg`)}
+        src={product.img_link}
         alt={product.title}
       />
       <p className="shelf-item__title">{product.title}</p>
