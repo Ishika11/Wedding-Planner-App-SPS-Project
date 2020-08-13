@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const pingRoutes = require("./routes/ping");
@@ -26,6 +27,10 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+// express.static allows requests to acess all images
+// path is used to forward request to /backend/images
+app.use("/images", express.static(path.join("images")));
 
 app.use("/api/ping", pingRoutes);
 app.use("/api/service", serviceRoutes);
