@@ -1,10 +1,12 @@
 import React, { Fragment } from "react";
-import Carousel from "react-responsive-carousel";
+import { Carousel } from "react-responsive-carousel";
+
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const ImageCarousel = ({ images }) => {
   return (
     <Fragment>
-      <div>
+      <Carousel showArrows={true}>
         {images.map((image) => (
           <img
             key={image.url}
@@ -12,7 +14,7 @@ const ImageCarousel = ({ images }) => {
             alt={image.url}
           />
         ))}
-      </div>
+      </Carousel>
     </Fragment>
   );
 };
