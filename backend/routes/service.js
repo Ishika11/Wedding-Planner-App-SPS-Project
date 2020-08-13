@@ -62,19 +62,23 @@ router.get('/query', function (request, response, next) {
 
   const queryString = utility.toQueryString(request.query);
   const { body } = request;
-  let x;
-  let y;
+  let minimumPrice;
+  let maximumPrice;
   if(typeof body.minPrice=='undefined'){
-      x=0;
+     //default value of minimum price when user enters nothing
+      minimumPrice=0;
   }
   else{
-    x=body.minPrice;
+     //setting the minimum Price as entered by user
+      minimumPrice=body.minPrice; 
   }
   if(typeof body.maxPrice=='undefined'){
-    y=10000000;
+    //default value of maximum price is 10 crore when user enters nothing
+    maximumPrice=100000000;
   }
   else{
-    y=body.maxPrice;
+    //setting the maximum Price as entered by user
+    maximumPrice=body.maxPrice;
   }
   models.service.findAll({
     where: [seq(queryString, {
@@ -82,8 +86,9 @@ router.get('/query', function (request, response, next) {
     }),
     {
     priceEstimate: {
-      [Op.gte]:x,
-      [Op.lte]:y
+      //priceEstimate should be greater than equal to minimumPrice and less than equal to maximumPrice
+      [Op.gte]:minimumPrice,
+      [Op.lte]:maximumPrice
     }
   }
     ],
@@ -93,13 +98,16 @@ router.get('/query', function (request, response, next) {
   }),
   include: [
     {
+        //inculding the location model to filter out based on location field
         model: models.location,
         where: seq(queryString, {
+            //filtering by location
             filterBy: ['name'],
         })
     },
   ]
   }).then(result => {
+      //sending the result
       response.status(status.SUCCESS).send(result);
   }).catch(next);
  
