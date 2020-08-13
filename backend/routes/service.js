@@ -40,4 +40,25 @@ router.post("", extractFiles, async (req, res) => {
   });
 });
 
+router.get("/:id", async (req, res) => {
+  let service;
+  try {
+    service = await models.service.findByPk(req.params.id, {
+      include: [models.location, models.serviceImage],
+    });
+  } catch {
+    return res.status(500).json({ message: "Fetching post failed!" });
+  }
+  if (service) {
+    res.status(200).json({
+      message: "Service sent successfully",
+      service: service,
+    });
+  } else {
+    res.status(404).json({
+      message: "Service not found!",
+    });
+  }
+});
+
 module.exports = router;
