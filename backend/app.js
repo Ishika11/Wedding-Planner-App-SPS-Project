@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 // express.static allows requests to acess all images
 // path is used to forward request to /backend/images
-app.use("/images", express.static(path.join("images")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use("/api/ping", pingRoutes);
 app.use("/api/service", serviceRoutes);
