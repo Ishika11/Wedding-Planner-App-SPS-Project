@@ -1,5 +1,5 @@
 import React from 'react';
-import Auth from '../auth/auth.js';
+import Auth from '../auth/Auth.js';
 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';

@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const pingRoutes = require('./routes/ping');
-const index = require('./routes/index');
+const auth = require('./routes/auth.js');
 var cors = require('cors');
 
 const app = express();
@@ -10,23 +10,6 @@ const app = express();
 app.use(bodyParser.json());
 // not used here, but you can parse urlencoded data too
 app.use(bodyParser.urlencoded({extended: false}));
-
-app.use((req, res, next) => {
-  // for CORS
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-with, Content-Type, Accept, Authorization"
-  );
-  // for allowed methods
-  // OPTIONS is set implicitely by angular to check if
-  // post request is valid
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
-  );
-  next();
-});
 
 var corsOption = {
   origin: true,
@@ -37,6 +20,6 @@ var corsOption = {
 app.use(cors(corsOption));
 
 app.use('/api/ping', pingRoutes);
-app.use('/api/v1', index);
+app.use('/api/v1/auth', auth);
 
 module.exports = app;
