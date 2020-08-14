@@ -1,21 +1,20 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Carousel } from "react-responsive-carousel";
-
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "./ImageCarousel.css";
+import { SERVERURL } from "./constants";
 
 const ImageCarousel = ({ images }) => {
   return (
-    <Fragment>
-      <Carousel showArrows={true}>
-        {images.map((image) => (
-          <img
-            key={image.url}
-            src={`http://localhost:4000/${image.url}`}
-            alt={image.url}
-          />
-        ))}
-      </Carousel>
-    </Fragment>
+    <Carousel showArrows={true} autoPlay>
+      {images.map((image) => (
+        <img
+          key={image.url}
+          src={`${SERVERURL}/${image.url}`}
+          alt={image.url}
+        />
+      ))}
+    </Carousel>
   );
 };
 
