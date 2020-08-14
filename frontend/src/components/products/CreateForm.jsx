@@ -42,13 +42,7 @@ const CreateProduct = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append("category", values.category);
-    formData.append("name", values.name);
-    formData.append("estimateUnit", values.estimateUnit);
-    formData.append("priceEstimate", values.priceEstimate);
-    formData.append("description", values.description);
-    formData.append("contactNumber", values.contactNumber);
-    formData.append("locations", values.locations);
+    Object.keys(values).forEach((key) => formData.append(key, values[key]));
 
     for (let i = 0; i < images.length; ++i) {
       formData.append("images", images[i]);
