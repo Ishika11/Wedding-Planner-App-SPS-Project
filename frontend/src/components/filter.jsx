@@ -85,7 +85,7 @@ class Filter extends Component {
         const { priceValue } = this.state;
         const { categoryValue } = this.state;
         const { locationValue } = this.state;
-        const {minPrice}=this.state;
+        const { minPrice}=this.state;
         const {maxPrice}=this.state;
 
         let url = `${baseUrl}api/service/query?`;
