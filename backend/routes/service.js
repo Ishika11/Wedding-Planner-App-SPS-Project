@@ -22,7 +22,7 @@ router.post("", extractFiles, async (req, res) => {
   // add all the locations
   // associate service with all the locations
   for (let i = 0; i < locations.length; ++i) {
-    let loc = await models.location.findByPk(locations[i]);
+    let loc = await models.location.findOne({ where: { name: locations[i] } });
     // create the location if it's not already present
     if (!loc) {
       loc = await models.location.create({ name: locations[i] });
