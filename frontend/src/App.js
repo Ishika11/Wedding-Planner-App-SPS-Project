@@ -1,22 +1,31 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-import CreateProduct from "./components/products/CreateForm";
+import React from 'react';
+import Filter from "./components/filter.jsx";
+// import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <h1>Hello world</h1>
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/product/new">
-            <CreateProduct />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    // <div className="App">
+    //   <header className="App-header">
+    //     <img src={logo} className="App-logo" alt="logo" />
+    //     <p>
+    //       Edit <code>src/App.js</code> and save to reload.
+    //     </p>
+    //     <a
+    //       className="App-link"
+    //       href="https://reactjs.org"
+    //       target="_blank"
+    //       rel="noopener noreferrer"
+    //     >
+    //       Learn React
+    //     </a>
+    //   </header>
+    // </div>
+    <div className="App">
+      <header className="App-header">
+        <Filter></Filter>
+      </header>
+    </div>
   );
 }
 
