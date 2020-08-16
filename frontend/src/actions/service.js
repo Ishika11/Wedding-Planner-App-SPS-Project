@@ -1,9 +1,6 @@
-import axios from "axios";
-
-// TODO(Arjan): Change SERVERURL on deployment
-const SERVERURL = "http://localhost:4000";
+import axios from "./axios";
 
 export const addService = async (formData) => {
-  const res = await axios.post(`${SERVERURL}/api/service`, formData);
+  const res = await axios.post("service", formData);
   return res;
 };
