@@ -12,32 +12,8 @@ import Avatar from "@material-ui/core/Avatar";
 import ExitToApp from "@material-ui/icons/ExitToApp";
 import VpnKey from "@material-ui/icons/VpnKey";
 
+import { useStyles } from "./AuthStyles";
 var config = require("./config.js");
-
-const useStyles = (theme) => ({
-  root: {
-    display: "flex",
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-    fontFamily: "Open Sans",
-  },
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-  button: {
-    marginLeft: theme.spacing(1),
-    fontFamily: "Averia Sans Libre, cursive",
-  },
-});
 
 class Auth extends Component {
   constructor() {
@@ -150,6 +126,7 @@ class Auth extends Component {
     let content = !!this.state.isAuthenticated ? (
       <div className={classes.root}>
         <Avatar alt={this.state.user.fullName} src={this.state.user.picture} />
+        <p className={[classes.modal, classes.button].join(' ')}>{this.state.user.fullName}</p>
         <Button
           color="secondary"
           variant="contained"
