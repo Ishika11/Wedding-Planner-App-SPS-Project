@@ -5,7 +5,6 @@ const files = require("../middlewares/files");
 const utility = require('./utility/utility');
 const seq = require('sequelize-easy-query');
 const { status } = require('./utility/status');
-const sequelize = require("sequelize");
 const { Op } = require("sequelize");
 
 const router = express.Router();
@@ -41,45 +40,48 @@ router.post('/', extractFiles, async (req, res) => {
   }
 
   res.status(status.CREATED).send(newService);
-  // res.status(200).json({
-  //   message: "Service Created",
-  // });
 });
 
 
-
-//Get all the service
+//GET ALL THE SERVICES AND PRODUCTS
 router.get('/', function (request, response, next) {
-
   models.service.findAll().then(products => {
       response.send(products);
   })
-      .catch(next);
+  .catch(next);
 });
 
-//Filter service based on category
-router.get('/query', function (request, response, next) {
 
+//FILTER SERVICES AND PRODUCTS BASED ON VARIOUS CRITERIAS
+router.get('/query', function (request, response, next) {
   const queryString = utility.toQueryString(request.query);
-  const { body } = request;
   let minimumPrice;
   let maximumPrice;
-  if(typeof body.minPrice=='undefined'){
+  var queries, temp, i, l;
+
+  // Split into key/value pairs
+  queries = queryString.split("&");
+
+  // Get the values of minimum and maximum price
+  for ( i = 0, l = queries.length; i < l; i++ ) {
+      temp = queries[i].split('=');
+      if(temp[0]=='minPrice'){
+          minimumPrice=temp[1];
+      }
+      if(temp[0]=='maxPrice'){
+          maximumPrice=temp[1];
+      }
+  }
+
+  if(typeof minimumPrice=='undefined'){
      //default value of minimum price when user enters nothing
       minimumPrice=0;
   }
-  else{
-     //setting the minimum Price as entered by user
-      minimumPrice=body.minPrice; 
-  }
-  if(typeof body.maxPrice=='undefined'){
+  if(typeof maximumPrice=='undefined'){
     //default value of maximum price is 10 crore when user enters nothing
     maximumPrice=100000000;
   }
-  else{
-    //setting the maximum Price as entered by user
-    maximumPrice=body.maxPrice;
-  }
+  
   models.service.findAll({
     where: [seq(queryString, {
         filterBy: ['category'],
@@ -98,19 +100,20 @@ router.get('/query', function (request, response, next) {
   }),
   include: [
     {
-        //inculding the location model to filter out based on location field
-        model: models.location,
-        where: seq(queryString, {
-            //filtering by location
-            filterBy: ['name'],
-        })
+      //inculding the location model to filter out based on location field
+      model: models.location,
+      where: seq(queryString, {
+          //filtering by location
+          filterBy: ['name'],
+      })
     },
   ]
   }).then(result => {
       //sending the result
       response.status(status.SUCCESS).send(result);
-  }).catch(next);
- 
+      next();
+  }) 
+  .catch(next)
 });
 
 module.exports = router;
