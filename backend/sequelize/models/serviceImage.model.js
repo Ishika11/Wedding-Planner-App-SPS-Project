@@ -4,7 +4,7 @@ module.exports = (db) => {
   db.define("serviceImage", {
     url: {
       type: DataTypes.STRING,
-      primaryKey: true,
+      unique: true,
     },
   });
 };

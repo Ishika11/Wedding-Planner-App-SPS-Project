@@ -9,8 +9,13 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
+<<<<<<< HEAD
 // {TODO: add exception handling}
 router.post('/', extractFiles, async (req, res) => {
+=======
+// {TODO(Arjan): add exception handling}
+router.post("", extractFiles, async (req, res) => {
+>>>>>>> d88c2af7dc1744d0f60a6b31d4695aacb2742438
   const { body, files } = req;
   
   const newService = await models.service.create({
@@ -26,7 +31,7 @@ router.post('/', extractFiles, async (req, res) => {
   // add all the locations
   // associate service with all the locations
   for (let i = 0; i < locations.length; ++i) {
-    let loc = await models.location.findByPk(locations[i]);
+    let loc = await models.location.findOne({ where: { name: locations[i] } });
     // create the location if it's not already present
     if (!loc) {
       loc = await models.location.create({ name: locations[i] });
@@ -114,6 +119,27 @@ router.get('/query', function (request, response, next) {
       next();
   }) 
   .catch(next)
+});
+
+router.get("/:id", async (req, res) => {
+  let service;
+  try {
+    service = await models.service.findByPk(req.params.id, {
+      include: [models.location, models.serviceImage],
+    });
+  } catch {
+    return res.status(500).json({ message: "Fetching post failed!" });
+  }
+  if (service) {
+    res.status(200).json({
+      message: "Service sent successfully",
+      service: service,
+    });
+  } else {
+    res.status(404).json({
+      message: "Service not found!",
+    });
+  }
 });
 
 module.exports = router;
