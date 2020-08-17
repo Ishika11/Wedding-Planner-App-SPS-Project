@@ -14,3 +14,5 @@ export const LOCATIONS = [
   "Chandigarh",
   "Goa",
 ];
+
+export const SERVERURL = "http://localhost:4000";
