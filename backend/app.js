@@ -1,16 +1,10 @@
-<<<<<<< HEAD
 const path = require("path");
-const express = require("express");
-const bodyParser = require("body-parser");
-const pingRoutes = require("./routes/ping");
 const serviceRoutes = require("./routes/service");
-=======
 const express = require('express');
 const bodyParser = require('body-parser');
 const pingRoutes = require('./routes/ping');
 const auth = require('./routes/auth.js');
 var cors = require('cors');
->>>>>>> auth
 
 const app = express();
 
