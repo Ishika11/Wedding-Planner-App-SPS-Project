@@ -1,8 +1,7 @@
 const app = require("./app");
-const debug = require("debug")("weddind-planner");
 const http = require("http");
 
-const normalizePort = val => {
+const normalizePort = (val) => {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -18,7 +17,7 @@ const normalizePort = val => {
   return false;
 };
 
-const onError = error => {
+const onError = (error) => {
   if (error.syscall !== "listen") {
     throw error;
   }
@@ -39,7 +38,7 @@ const onError = error => {
 const onListening = () => {
   const addr = server.address();
   const bind = typeof port === "string" ? "pipe " + port : "port " + port;
-  debug("Listening on " + bind);
+  console.log("Listening on " + bind);
 };
 
 const port = normalizePort(process.env.PORT || "4000");
@@ -49,3 +48,17 @@ const server = http.createServer(app);
 server.on("error", onError);
 server.on("listening", onListening);
 server.listen(port);
+
+// Check db connection
+const db = require("./sequelize");
+
+const connectDB = async () => {
+  try {
+    await db.sync({ alter: true });
+    console.log("Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+};
+
+connectDB();

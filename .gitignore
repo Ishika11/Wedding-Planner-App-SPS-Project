@@ -3,6 +3,9 @@
 
 # backend
 backend/node_modules
+backend/images
+backend/nodemon.json
+
 
 # dependencies
 /frontend/node_modules
