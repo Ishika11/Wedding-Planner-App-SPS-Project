@@ -4,7 +4,7 @@ module.exports = (db) => {
   db.define("location", {
     name: {
       type: DataTypes.STRING,
-      primaryKey: true,
+      unique: true,
     },
   });
 };
