@@ -9,13 +9,8 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
-<<<<<<< HEAD
-// {TODO: add exception handling}
-router.post('/', extractFiles, async (req, res) => {
-=======
 // {TODO(Arjan): add exception handling}
 router.post("", extractFiles, async (req, res) => {
->>>>>>> d88c2af7dc1744d0f60a6b31d4695aacb2742438
   const { body, files } = req;
   
   const newService = await models.service.create({
