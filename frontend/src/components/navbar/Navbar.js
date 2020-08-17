@@ -17,7 +17,7 @@ export default function Navbar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h4" className={classes.title}>
-            EaseMyशादी
+            EaseOurशादी
           </Typography>
 
           <Button
