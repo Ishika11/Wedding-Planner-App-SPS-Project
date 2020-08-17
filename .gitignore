@@ -1,6 +1,10 @@
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# config files with API keys
+/frontend/src/components/auth/config.js
+/backend/config.js
+
 # backend
 backend/node_modules
 backend/images
@@ -17,6 +21,7 @@ frontend/.pnp.js
 
 # production
 /frontend/build
+
 
 # misc
 frontend/.DS_Store
