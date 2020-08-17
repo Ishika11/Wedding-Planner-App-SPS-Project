@@ -17,6 +17,7 @@ module.exports = function () {
       function (token, tokenSecret, profile, done) {
         // console.log(profile);
         var newUser = {
+          fullName: profile.displayName,
           email: profile.emails[0].value,
           twitterProvider: {
             id: profile.id,

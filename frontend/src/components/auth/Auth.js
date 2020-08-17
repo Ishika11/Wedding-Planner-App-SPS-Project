@@ -13,6 +13,7 @@ import ExitToApp from "@material-ui/icons/ExitToApp";
 import VpnKey from "@material-ui/icons/VpnKey";
 
 import { useStyles } from "./AuthStyles";
+import { SERVERURL } from "../products/constants";
 var config = require("./config.js");
 
 class Auth extends Component {
@@ -66,7 +67,7 @@ class Auth extends Component {
       mode: "cors",
       cache: "default",
     };
-    fetch("http://localhost:4000/api/v1/auth/facebook", options).then((r) => {
+    fetch(`${SERVERURL}/api/v1/auth/facebook`, options).then((r) => {
       const token = r.headers.get("x-auth-token");
       r.json().then((user) => {
         if (token) {
@@ -90,7 +91,7 @@ class Auth extends Component {
       mode: "cors",
       cache: "default",
     };
-    fetch("http://localhost:4000/api/v1/auth/google", options).then((r) => {
+    fetch(`${SERVERURL}/api/v1/auth/google`, options).then((r) => {
       const token = r.headers.get("x-auth-token");
       r.json().then((user) => {
         if (token) {
@@ -123,6 +124,8 @@ class Auth extends Component {
       height: "100%",
       marginTop: "10px",
     };
+    const twitterLoginUrl=`${SERVERURL}/api/v1/auth/twitter`;
+    const twitterRequestTokenUrl=`${SERVERURL}/api/v1/auth/twitter/reverse`;
     let content = !!this.state.isAuthenticated ? (
       <div className={classes.root}>
         <Avatar alt={this.state.user.fullName} src={this.state.user.picture} />
@@ -168,10 +171,10 @@ class Auth extends Component {
               <div style={{ textAlign: "center" }}>
                 <TwitterLogin
                   style={buttonSize}
-                  loginUrl="http://localhost:4000/api/v1/auth/twitter"
+                  loginUrl={twitterLoginUrl}
                   onFailure={this.onFailure}
                   onSuccess={this.twitterResponse}
-                  requestTokenUrl="http://localhost:4000/api/v1/auth/twitter/reverse"
+                  requestTokenUrl={twitterRequestTokenUrl}
                   showIcon={true}
                 ></TwitterLogin>
                 <br></br>
