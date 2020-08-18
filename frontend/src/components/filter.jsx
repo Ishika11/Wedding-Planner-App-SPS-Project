@@ -221,6 +221,7 @@ class Filter extends Component {
     * @returns {void}
     */
     render() {
+    // eslint-disable-next-line
     const { productList } = this.state;
     const { locationValue } = this.state;
     const { priceValue } = this.state;
@@ -277,7 +278,7 @@ class Filter extends Component {
                         value={locationValue}
                         textField="location"
                         valueField="location"
-                        placeholder="Select locations"
+                        placeholder="Select locations for ceremonies"
                         filter="contains"
                         onChange={(locationValues) =>
                         this.setState({ locationValue: locationValues })
@@ -292,7 +293,7 @@ class Filter extends Component {
                         value={priceValue}
                         textField="price"
                         valueField="id"
-                        placeholder="Sort the services by price"
+                        placeholder="Sort services by price"
                         filter="contains"
                         isMulti
                         onChange={(priceValues) =>
@@ -314,35 +315,6 @@ class Filter extends Component {
                         Reset
                     </Button>
                 </div>
-            </div>
-            {/* Listing Products in tabular form */}
-            <div className="list-table-position">
-            <h1 id="title">Products</h1>
-            <table id="table">
-                <tbody>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Estimate unit</th>
-                    <th>Price Estimate</th>
-                    <th>Conatct Number</th>
-                </tr>
-                {productList &&
-                    productList.map((product) => {
-                    return (
-                        <tr>
-                        <td>{product.id}</td>
-                        <td>{product.name}</td>
-                        <td>{product.category}</td>
-                        <td>{product.estimateUnit}</td>
-                        <td>{product.priceEstimate}</td>
-                        <td>{product.contact}</td>
-                        </tr>
-                    );
-                    })}
-                </tbody>
-            </table>
             </div>
         </div>
     );
