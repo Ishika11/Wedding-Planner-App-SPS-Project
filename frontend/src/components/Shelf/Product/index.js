@@ -1,24 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import 'frontend/src/components/products/ServicePage.jsx'
+// import ServicePage from '../../products/ServicePage';
+import CreateForm from '../../products/CreateForm.jsx';
 import Thumb from '../../Thumb';
-import util from '../../../services/util';
+import util from '../../../Services/util';
 
 const Product = props => {
   const product = props.product;
 
   product.quantity = 1;
 
-  let formattedPrice = util.formatPrice(product.price, product.currencyId);
+  let formattedPrice = util.formatPrice(product.priceEstimate, product.currencyId);
 
+  // eslint-disable-next-line
   let productInstallment;
 
+  
   function viewProduct(){
-    <ServicePage id= {product.id}/>
-    return
+    console.log("hi");
+    console.log(product.id);
+    // return(<ServicePage id= {product.id}/>);
+    return (<CreateForm/>);
   }
   if (!!product.installments) {
-    const installmentPrice = product.price / product.installments;
+    const installmentPrice = product.priceEstimate / product.installments;
 
     productInstallment = (
       <div className="installment">
@@ -31,17 +36,30 @@ const Product = props => {
       </div>
     );
   }
+    var size;
+    var imageUrl;
+    size=product.serviceImages.length;
+    if(size===0){
+      imageUrl="https://i.postimg.cc/fLSfSqsK/105-1.jpg";
+    }
+    else{
+      imageUrl='';
+      imageUrl+='backend/';
+      imageUrl+=product.serviceImages[0].url;
+
+    }
 
   return (
+    
     <div
       className="shelf-item"
     >
       <Thumb
         classes="shelf-item__thumb"
-        src={product.url}
+        src={imageUrl}
         alt={product.name}
       />
-      <button onclick="viewProduct()">View Product</button>
+      <button onClick={() => viewProduct()}>View Product</button>
       <p className="shelf-item__title">{product.name}</p>
       <div className="shelf-item__price">
         <div className="val">

@@ -7,7 +7,7 @@ export const updateCart = cartProducts => dispatch => {
   }, 0);
 
   let totalPrice = cartProducts.reduce((sum, p) => {
-    sum += p.price * p.quantity;
+    sum += p.priceEstimate * p.quantity;
     return sum;
   }, 0);
 

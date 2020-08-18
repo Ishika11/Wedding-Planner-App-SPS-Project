@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { fetchProducts } from '../../services/shelf/actions';
-import { addProduct } from '../../services/cart/actions';
+import { fetchProducts } from '../../Services/shelf/actions';
+import { addProduct } from '../../Services/cart/actions';
 
 import Product from './Product';
 
 import ShelfHeader from './ShelfHeader';
 import Clearfix from '../Clearfix';
-import Spinner from '../Spinner';
+// import Spinner from '../Spinner';
 
 import './style.scss';
 
@@ -51,7 +51,7 @@ class Shelf extends Component {
 
     return (
       <React.Fragment>
-        {this.state.loading && <Spinner />}
+        {/* {this.state.loading && <Spinner />} */}
         <div className="shelf-container">
           <ShelfHeader productsLength={products.length} />
           {p}
@@ -65,8 +65,8 @@ class Shelf extends Component {
 
 const mapStateToProps = state => ({
   products: state.shelf.products,
-  filters: state.filters.items,
-  sort: state.sort.type
+  // filters: state.filters.items,
+  // sort: state.sort.type
 });
 
 export default connect(

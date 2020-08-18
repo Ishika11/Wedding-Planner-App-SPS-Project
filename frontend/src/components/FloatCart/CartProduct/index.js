@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Thumb from './../../Thumb';
-import util from '../../../services/util';
+import util from '../../../Services/util';
 
 class CartProduct extends Component {
   static propTypes = {
@@ -30,7 +30,18 @@ class CartProduct extends Component {
     if (!!this.state.isMouseOver) {
       classes.push('shelf-item--mouseover');
     }
-
+    var size;
+    var imageUrl;
+    size=product.serviceImages.length;
+    if(size===0){
+      imageUrl="https://i.postimg.cc/fLSfSqsK/105-1.jpg";
+    }
+    else{
+      imageUrl='';
+      imageUrl+='backend/';
+      imageUrl+=product.serviceImages[0].url;
+      console.log(imageUrl);
+    }
     return (
       <div className={classes.join(' ')}>
         <div
@@ -41,22 +52,20 @@ class CartProduct extends Component {
         />
         <Thumb
           classes="shelf-item__thumb"
-          src={product.img_link}
+          src={imageUrl}
           alt={product.title}
         />
         <div className="shelf-item__details">
-          <p className="title">{product.title}</p>
+          <p className="title">{product.name}</p>
           <p className="desc">
-            {`${product.availableSizes[0]} | ${product.style}`} <br />
             Quantity: {product.quantity}
           </p>
         </div>
         <div className="shelf-item__price">
           <p>{`${product.currencyFormat}  ${util.formatPrice(
-            product.price
+            product.priceEstimate
           )}`}</p>
         </div>
-
         <div className="clearfix" />
       </div>
     );
