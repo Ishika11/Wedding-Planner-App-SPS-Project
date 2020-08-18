@@ -1,34 +1,39 @@
-import React, { Component } from 'react';
-import { DropdownList } from 'react-widgets';
-import { Button } from 'reactstrap';
-import baseUrl from './url';
-import './dropdown.scss';
+import React, { Component } from "react";
+import { DropdownList, Multiselect } from "react-widgets";
+import { Button } from "reactstrap";
+import baseUrl from "./url";
+import urlToDefaultDisplay from "./urlForDefaultDisplay";
+import "./dropdown.scss";
 
+
+//List of all the available services.
 const categoryList = [
-    {category: 'Entertainment' },
-    {category: 'Caterer' },
-    {category: 'Venue' },
-    {category: 'Clothes' },
-    {category: 'Gifts' },
+   "Entertainment",
+   "Caterer",
+   "Venue" ,
+   "Clothes" ,
+   "Gifts" ,
 ];
 
+//To sort services in ascending or descending order of their prices.
 const priceList = [
-    { id: 'ASC', price: 'Lowest to Highest' }, 
-    { id: 'DESC', price: 'Hightest to Lowest' }
+  { id: "ASC", price: "Price: Low to High" },
+  { id: "DESC", price: "Price: High to Low" },
 ];
 
+//List of all the available locations.
 const locationList = [
-    { location: 'Mumbai' },
-    { location: 'Delhi' },
-    { location: 'Bangalore' },
-    { location: 'Goa' },
-    { location: 'Kolkata' },
-    { location: 'Chandigarh' },
+  "Mumbai",
+  "Delhi",
+  "Bangalore",
+  "Goa",
+  "Kolkata",
+  "Chandigarh",
 ];
 
 /**
- * Class to list all the products with filters
- */
+* Class to list all the services with filters applied.
+*/
 class Filter extends Component {
     /**
      * @returns {void}
@@ -36,39 +41,39 @@ class Filter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        productList: [],
-        priceValue: null,
-        categoryValue: null,
-        locationValue: null,
-        minPrice:'',
-        maxPrice:'',
+            productList: [],
+            priceValue: null,
+            categoryValue: null,
+            locationValue: null,
+            minPrice: "",
+            maxPrice: "",
         };
         this.handleInput = this.handleInput.bind(this);
     }
 
     /**
-     * Mounts the component, see React docs.
+     * Mounts the component.
      * @returns {void}
      */
     componentDidMount() {
         const getProducts = `${baseUrl}api/service`;
         fetch(getProducts, {
-        method: 'GET',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
+            method: "GET",
+            headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            },
         })
         .then((response) => response.json())
         .then((response) => {
-            this.setState({
+        this.setState({
             productList: response,
             });
         });
     }
 
     /**
-     * Sets the state for fields in the form 
+     * Takes minPrice and maxPrice as input.
      * @param {string} type field
      * @param {event} event  user input
      * @return {void}
@@ -85,184 +90,263 @@ class Filter extends Component {
         const { priceValue } = this.state;
         const { categoryValue } = this.state;
         const { locationValue } = this.state;
-        const { minPrice}=this.state;
-        const {maxPrice}=this.state;
+        const { minPrice } = this.state;
+        const { maxPrice } = this.state;
 
+        //the base URL for the filter API
         let url = `${baseUrl}api/service/query?`;
-        if (locationValue) {
-        url = `${url}name=${locationValue.location}&`;
-        }
-        if (categoryValue) {
-        url = `${url}category=${categoryValue.category}&`;
-        }
-        if (priceValue) {
-        url = `${url}priceEstimate=${priceValue.id}&`;
-        }
-        if (minPrice) {
-        url = `${url}minPrice=${minPrice}&`;
-        }
-        if (maxPrice) {
-        url = `${url}maxPrice=${maxPrice}&`;
+
+        //Constructing the URL from the user selected set of locations.
+        if(locationValue){
+            var sizeOfLocationArray;
+            sizeOfLocationArray=locationValue.length;
+            if (sizeOfLocationArray!==0) {
+                //If user selects only one location
+                if(sizeOfLocationArray===1){
+                    url+='name=';
+                    url+=locationValue[0];
+                    url+='&';
+                }
+                //If user selects multiple locations
+                else{
+                    for(var iterator=0;iterator<sizeOfLocationArray-1;iterator++){
+                        if(iterator===0){
+                            url+='name=';
+                            url+=locationValue[iterator];
+                            url+=',';
+                        }
+                        else{
+                        url+=locationValue[iterator];
+                        url+=',';
+                        }
+                    } 
+                    //Appending the last location to URL
+                    url+=locationValue[sizeOfLocationArray-1];
+                    url+='&'
+                }
+            }
         }
 
-        console.log(url);
-        console.log(minPrice);
-        console.log(maxPrice);
+        //Constructing the URL from the user selected set of services.
+        if(categoryValue){
+            var sizeOfCategoryArray;
+            sizeOfCategoryArray=categoryValue.length;
+            if (sizeOfCategoryArray!==0) {
+                //If user selects only one service
+                if(sizeOfCategoryArray===1){
+                    url+='category=';
+                    url+=categoryValue[0];
+                    url+='&';
+                }
+                //If user selects multiple services
+                else{
+                    for(iterator=0;iterator<sizeOfCategoryArray-1;iterator++){
+                        if(iterator===0){
+                            url+='category=';
+                            url+=categoryValue[iterator];
+                            url+=',';
+                        }
+                        else{
+                        url+=categoryValue[iterator];
+                        url+=',';
+                        }
+                    } 
+                    //Appending the last service to URL
+                    url+=categoryValue[sizeOfCategoryArray-1];
+                    url+='&'
+                }
+            }
+        }
+        
+        //Appends ASC or DESC to the URL
+        if (priceValue) {
+            url = `${url}priceEstimate=${priceValue.id}&`;
+        }
+        //Append minimum price to the URL
+        if (minPrice) {
+            url = `${url}minPrice=${minPrice}&`;
+        }
+        //Append maximum price to the URL
+        if (maxPrice) {
+            url = `${url}maxPrice=${maxPrice}&`;
+        }
+
+        //Calling GET API to fetch the services
         fetch(url, {
-        method: 'GET',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
+            method: "GET",
+            headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            },
         })
         .then((response) => response.json())
         .then((response) => {
-            this.setState({
-            productList: response,
+        this.setState({
+            //Storing the response received from server in a product list.
+                productList: response,
             });
         });
     };
 
     /**
-     * Resets the state of Filters to null
+     * On clicking the reset button it resets the filter values to null  
+     * and dislay the services of all categories (default page)
      * @returns {void}
      */
     resetFilters = () => {
+        //reseting the values of filter to null
         this.setState({
-        priceyValue: null,
-        categoryValue: null,
-        locationValue: null,
+            priceyValue: null,
+            categoryValue: [],
+            locationValue: [],
+        });
+        //calling the get api to get the default page displayed
+        fetch(urlToDefaultDisplay, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            this.setState({
+                productList: response,
+            });
         });
     };
 
     /**
-     * Renders the plugin
-     * @returns {void}
-     */
+    * Renders
+    * @returns {void}
+    */
     render() {
-        const { productList } = this.state;
-        const { locationValue } = this.state;
-        const { priceValue } = this.state;
-        const { categoryValue } = this.state;
-        const { minPrice } = this.state;
-        const { maxPrice } = this.state;  
+    const { productList } = this.state;
+    const { locationValue } = this.state;
+    const { priceValue } = this.state;
+    const { categoryValue } = this.state;
+    const { minPrice } = this.state;
+    const { maxPrice } = this.state;
 
-        return (
-            <div>
-                <form className="form-container">
-                    <div className="input-price-flex-row">
+    return (
+        <div>
+            {/* Form to take minimum and maximum price as input from user */}
+            <form>
+                <div>
+                    <h3>Price</h3>
+                    {/* Input box for minimum price for a service */}
                     <input
-                        className="input-text-box reduce-width-to-half"
                         label="Minimum Price"
                         placeholder="Enter minimum price"
-                        onChange={(event) => this.handleInput('minPrice', event)}
+                        onChange={(event) => this.handleInput("minPrice", event)}
                         value={minPrice}
                     />
+                    {/* Input price for maximum price for a service */}
                     <input
-                        className="input-text-box reduce-width-to-half"
                         label="Maximum Price"
                         placeholder="Enter maximum price"
-                        onChange={(event) => this.handleInput('maxPrice', event)}
+                        onChange={(event) => this.handleInput("maxPrice", event)}
                         value={maxPrice}
+                        className="shift-left"
                     />
-                    </div>
-                </ form>
-                <div className="list-page-body-ui">
-                    <div className="filter-container-position">
-                        <div className="filter-reset-button-flex-row ">
-                            <h2>Filters</h2>
-                            <Button onClick={() => this.filterProducts()} className="button--filter">
-                            Filter
-                            </Button>
-                            <Button onClick={() => this.resetFilters()} className="button--reset">
-                            Reset
-                            </Button>
-                        </div>
-                        <div className="filter-conatiner-row-margin-left">
-                            <h2>Categorys</h2>
-                            <DropdownList
-                            data={categoryList}
-                            value={categoryValue}
-                            textField="category"
-                            valueField="category"
-                            filter="contains"
-                            className="filter-list-dropdown"
-                            isMulti
-                            onChange={(categoryValues) => this.setState({ categoryValue: categoryValues })}
-                            />
-                        </div>
-                        <div>
-                            <h2>Locations</h2>
-                            <DropdownList
-                            data={locationList}
-                            value={locationValue}
-                            textField="location"
-                            valueField="location"
-                            filter="contains"
-                            className="filter-list-dropdown"
-                            isMulti
-                            onChange={(locationValues) => this.setState({ locationValue: locationValues })}
-                            />
-                        </div>
-                        <div>
-                            <h2>Order by</h2>
-                            <DropdownList
-                            data={priceList}
-                            value={priceValue}
-                            textField="price"
-                            valueField="id"
-                            filter="contains"
-                            isMulti
-                            className="filter-list-dropdown"
-                            onChange={(priceValues) => this.setState({ priceValue: priceValues })}
-                            />
-                        </div> 
-                    </div>
-                    {/* Listing Products in tabular form */}
-                    <div className="list-table-position">
-                        <h1 id="title">Products</h1>
-                        <table id="table">
-                            <tbody>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th>Estimate unit</th>
-                                <th>Price Estimate</th>
-                                <th>Conatct Number</th>
-                            </tr>
-                            {productList &&
-                                productList.map((product) => {
-                                return (
-                                    <tr>
-                                    <td>
-                                        {product.id}
-                                    </td>
-                                    <td>
-                                        {product.name}
-                                    </td>
-                                    <td>
-                                        {product.category}
-                                    </td>
-                                    <td>
-                                        {product.estimateUnit}
-                                    </td>
-                                    <td>
-                                        {product.priceEstimate}
-                                    </td>
-                                    <td>
-                                        {product.contact}
-                                    </td>
-                                    </tr>
-                                );
-                                })}
-                            </tbody>
-                        </table>
-                    </div>
+                </div>
+            </form>
+            <div>
+                <div>
+                    <h3>Service*</h3>
+                    {/* Multiselect filter for services */}
+                    <Multiselect
+                        dropUp
+                        data={categoryList}
+                        value={categoryValue}
+                        textField="category"
+                        valueField="category"
+                        placeholder="Select services to avail"
+                        filter="contains"
+                        onChange={(categoryValues) =>
+                        this.setState({ categoryValue: categoryValues })
+                        }
+                    />
+                </div>
+                <div>
+                    {/* Multiselect filter for loactions */}
+                    <h3>Location</h3>
+                    <Multiselect
+                        dropUp
+                        data={locationList}
+                        value={locationValue}
+                        textField="location"
+                        valueField="location"
+                        placeholder="Select locations"
+                        filter="contains"
+                        onChange={(locationValues) =>
+                        this.setState({ locationValue: locationValues })
+                        }
+                    />
+                </div>
+                <div>
+                    {/* Filter to sort according to price */}
+                    <h3>Sort by</h3>
+                    <DropdownList
+                        data={priceList}
+                        value={priceValue}
+                        textField="price"
+                        valueField="id"
+                        placeholder="Sort the services by price"
+                        filter="contains"
+                        isMulti
+                        onChange={(priceValues) =>
+                        this.setState({ priceValue: priceValues })
+                        }
+                    />
+                </div>
+                <div>
+                    <Button
+                        onClick={() => this.filterProducts()}
+                        className="button--filter"
+                    >
+                        Go
+                    </Button>
+                    <Button
+                        onClick={() => this.resetFilters()}
+                        className="button--reset"
+                    >
+                        Reset
+                    </Button>
                 </div>
             </div>
-        );
+            {/* Listing Products in tabular form */}
+            <div className="list-table-position">
+            <h1 id="title">Products</h1>
+            <table id="table">
+                <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Estimate unit</th>
+                    <th>Price Estimate</th>
+                    <th>Conatct Number</th>
+                </tr>
+                {productList &&
+                    productList.map((product) => {
+                    return (
+                        <tr>
+                        <td>{product.id}</td>
+                        <td>{product.name}</td>
+                        <td>{product.category}</td>
+                        <td>{product.estimateUnit}</td>
+                        <td>{product.priceEstimate}</td>
+                        <td>{product.contact}</td>
+                        </tr>
+                    );
+                    })}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    );
     }
-}
+    }
 
 export default Filter;

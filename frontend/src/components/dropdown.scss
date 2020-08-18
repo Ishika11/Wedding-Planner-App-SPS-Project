@@ -812,3 +812,21 @@ fieldset[disabled] .rw-multiselect-tag {
   box-shadow: none;
   cursor: not-allowed;
 }
+.button--filter {
+  background-color: rgb(0, 73, 176);
+  color: white;
+  width: 10%;
+  height: 30px;
+  margin-top: 5%;
+}
+.button--reset {
+  background-color: rgb(0, 73, 176);
+  color: white;
+  margin-left: 5%;
+  width: 10%;
+  height: 30px;
+  margin-top: 5%;
+}
+.shift-left{
+  margin-left: 5%;
+}
