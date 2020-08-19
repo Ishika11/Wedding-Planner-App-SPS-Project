@@ -1,12 +1,14 @@
 const express = require("express");
 const { models } = require("../sequelize");
 const extractFiles = require("../middlewares/files");
+const checkAuth = require("../middlewares/checkAuth");
 const files = require("../middlewares/files");
 
 const router = express.Router();
 
 // {TODO(Arjan): add exception handling}
-router.post("", extractFiles, async (req, res) => {
+router.post("", checkAuth, extractFiles, async (req, res) => {
+  console.log(req.user);
   const { body, files } = req;
 
   const newService = await models.service.create({
