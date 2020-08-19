@@ -6,6 +6,10 @@ module.exports = (db) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    creator_email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     category: {
       type: DataTypes.STRING,
       allowNull: false,

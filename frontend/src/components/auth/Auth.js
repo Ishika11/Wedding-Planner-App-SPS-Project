@@ -14,6 +14,7 @@ import VpnKey from "@material-ui/icons/VpnKey";
 
 import { useStyles } from "./AuthStyles";
 import { SERVERURL } from "../products/constants";
+import { setAuthToken } from "../../utils/setAuthToken";
 var config = require("./config.js");
 
 class Auth extends Component {
@@ -31,6 +32,7 @@ class Auth extends Component {
 
   setLocalState = () => {
     localStorage.setItem("authState", JSON.stringify(this.state));
+    setAuthToken(this.state.token);
   };
 
   logout = () => {
@@ -124,12 +126,14 @@ class Auth extends Component {
       height: "100%",
       marginTop: "10px",
     };
-    const twitterLoginUrl=`${SERVERURL}/api/v1/auth/twitter`;
-    const twitterRequestTokenUrl=`${SERVERURL}/api/v1/auth/twitter/reverse`;
+    const twitterLoginUrl = `${SERVERURL}/api/v1/auth/twitter`;
+    const twitterRequestTokenUrl = `${SERVERURL}/api/v1/auth/twitter/reverse`;
     let content = !!this.state.isAuthenticated ? (
       <div className={classes.root}>
         <Avatar alt={this.state.user.fullName} src={this.state.user.picture} />
-        <p className={[classes.modal, classes.button].join(' ')}>{this.state.user.fullName}</p>
+        <p className={[classes.modal, classes.button].join(" ")}>
+          {this.state.user.fullName}
+        </p>
         <Button
           color="secondary"
           variant="contained"
