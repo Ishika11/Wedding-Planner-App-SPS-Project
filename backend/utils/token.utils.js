@@ -5,7 +5,7 @@ var createToken = function (auth) {
     {
       id: auth.id,
     },
-    "my-secret",
+    process.env.SECRET_KEY,
     {
       expiresIn: 60 * 120,
     }

@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
     const token = req.headers["x-auth-token"];
     // jwt verify also throws error on failure
     // hence in try catch block
-    const decodedToken = jwt.verify(token, "my-secret");
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     req.user = decodedToken.id;
     next();
   } catch (error) {
