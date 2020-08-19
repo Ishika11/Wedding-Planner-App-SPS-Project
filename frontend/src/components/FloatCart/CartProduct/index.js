@@ -32,15 +32,20 @@ class CartProduct extends Component {
     }
     var size;
     var imageUrl;
-    size=product.serviceImages.length;
+    if(typeof serviceImages!=='undefined'){
+      size=product.serviceImages.length;
+    }
+    else{
+      size=0;
+    }
     if(size===0){
       imageUrl="https://i.postimg.cc/fLSfSqsK/105-1.jpg";
     }
     else{
       imageUrl='';
-      imageUrl+='backend/';
+      imageUrl+='http://localhost:4000/';
       imageUrl+=product.serviceImages[0].url;
-      console.log(imageUrl);
+      // console.log(imageUrl);
     }
     return (
       <div className={classes.join(' ')}>
@@ -62,7 +67,7 @@ class CartProduct extends Component {
           </p>
         </div>
         <div className="shelf-item__price">
-          <p>{`${product.currencyFormat}  ${util.formatPrice(
+          <p>INR {`${util.formatPrice(
             product.priceEstimate
           )}`}</p>
         </div>

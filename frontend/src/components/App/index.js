@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Shelf from '../Shelf';
 import FloatCart from '../FloatCart';
 
