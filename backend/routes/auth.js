@@ -62,7 +62,7 @@ router.route("/twitter").post(
       return res.send(401, "User Not Authenticated");
     }
     req.auth = {
-      id: req.user.id,
+      id: req.user.email,
     };
 
     return next();
@@ -78,7 +78,7 @@ router.route("/facebook").post(
       return res.send(401, "User Not Authenticated");
     }
     req.auth = {
-      id: req.user.id,
+      id: req.user.email,
     };
 
     next();
