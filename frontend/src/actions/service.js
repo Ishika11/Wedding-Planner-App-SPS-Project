@@ -7,5 +7,4 @@ export const addService = async (formData) => {
 
 export const getService = async (id) => {
   const res = await axios.get(`/service/${id}`);
-  return res;
 };
