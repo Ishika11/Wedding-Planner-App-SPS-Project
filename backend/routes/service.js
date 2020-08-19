@@ -8,7 +8,6 @@ const router = express.Router();
 
 // {TODO(Arjan): add exception handling}
 router.post("", checkAuth, extractFiles, async (req, res) => {
-  console.log(req.user);
   const { body, files } = req;
 
   const newService = await models.service.create({
@@ -18,6 +17,7 @@ router.post("", checkAuth, extractFiles, async (req, res) => {
     priceEstimate: body.priceEstimate,
     description: body.description,
     contact: body.contactNumber,
+    creator_email: req.user,
   });
 
   locations = body.locations.split(",");
