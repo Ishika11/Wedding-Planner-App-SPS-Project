@@ -15,6 +15,7 @@ import { Grid, Container } from "@material-ui/core";
 import "./CreateForm.css";
 import { LOCATIONS, CATEGORIES } from "./constants";
 import { addService } from "../../actions/service";
+import { Redirect } from "react-router";
 
 const CreateProduct = () => {
   let fileInputElement;
@@ -29,6 +30,7 @@ const CreateProduct = () => {
     locations: [],
   });
 
+  const [redirect, setRedirect] = useState(false);
   const [images, setImages] = useState([]);
 
   const handleChange = (prop) => (event) => {
@@ -50,7 +52,12 @@ const CreateProduct = () => {
 
     const result = await addService(formData);
     console.log(result);
+    setRedirect(true);
   };
+
+  if (redirect) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Container>
