@@ -11,8 +11,10 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { useParams } from "react-router-dom";
 
-const ServicePage = ({ id }) => {
+const ServicePage = () => {
+  const id = useParams().id;
   const [service, setService] = useState("");
 
   const makeLocationString = (locations) =>
