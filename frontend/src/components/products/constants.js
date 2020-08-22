@@ -15,4 +15,7 @@ export const LOCATIONS = [
   "Goa",
 ];
 
-export const SERVERURL = "http://localhost:4000";
+export const SERVERURL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:4000"
+    : "https://server-dot-abal-sps-summer20.el.r.appspot.com";
