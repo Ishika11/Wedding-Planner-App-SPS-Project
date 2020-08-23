@@ -4,7 +4,7 @@ const axios = require("axios");
 const axiosInstance = axios.create({
   baseURL:
     process.env.NODE_ENV === "development"
-      ? "http://localhost:4000/api/"
+      ? "http://localhost:4000/api"
       : "https://server-dot-abal-sps-summer20.el.r.appspot.com/api",
 });
 
