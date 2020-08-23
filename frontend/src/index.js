@@ -2,10 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import Root from "./Root";
+import "./index.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Root>
+      <App />
+    </Root>
   </React.StrictMode>,
   document.getElementById("root")
 );
