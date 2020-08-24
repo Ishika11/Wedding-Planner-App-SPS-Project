@@ -1,16 +1,18 @@
 const express = require("express");
 const { models } = require("../sequelize");
 const extractFiles = require("../middlewares/files");
+const renameFiles = require("../middlewares/renameFiles");
 const checkAuth = require("../middlewares/checkAuth");
 const utility = require("./utility/utility");
 const seq = require("sequelize-easy-query");
 const { status } = require("./utility/status");
 const { Op } = require("sequelize");
+const uploadImage = require("../utils/imageUpload");
 
 const router = express.Router();
 
 // {TODO(Arjan): add exception handling}
-router.post("", checkAuth, extractFiles, async (req, res) => {
+router.post("", checkAuth, extractFiles, renameFiles, async (req, res) => {
   const { body, files } = req;
 
   const newService = await models.service.create({
@@ -23,6 +25,14 @@ router.post("", checkAuth, extractFiles, async (req, res) => {
     creator_email: req.user,
   });
 
+  const imageUrls = await Promise.all(files.map((file) => uploadImage(file)));
+  console.log(imageUrls);
+  await Promise.all(
+    imageUrls.map((imageUrl) =>
+      newService.createServiceImage({ url: imageUrl })
+    )
+  );
+
   locations = body.locations.split(",");
   // add all the locations
   // associate service with all the locations
@@ -33,11 +43,6 @@ router.post("", checkAuth, extractFiles, async (req, res) => {
       loc = await models.location.create({ name: locations[i] });
     }
     newService.addLocation(loc);
-  }
-
-  // associate all services with the image urls
-  for (let i = 0; i < files.length; ++i) {
-    await newService.createServiceImage({ url: files[i].path });
   }
 
   res.status(200).json({
