@@ -17,7 +17,7 @@
     width: 50px;
     height: 50px;
     color: black;
-    background-color: lightcoral;
+    background-color: rgb(148, 136, 231);
     text-align: center;
     line-height: 50px;
     position: absolute;
@@ -26,7 +26,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: lightcoral;
+      background-color: slateblue;
     }
   }
 
@@ -44,7 +44,7 @@
 
     &--float-cart-closed {
       position: absolute;
-      background-color: goldenrod;
+      background-color: slateblue;
       background-size: 50%;
       left: -60px;
       width: 60px;
@@ -67,7 +67,7 @@
       text-align: center;
       line-height: 18px;
       border-radius: 50%;
-      background-color: silver;
+      background-color: pink;
       position: absolute;
       bottom: -5px;
       right: 0px;
@@ -238,7 +238,7 @@
     .buy-btn {
       color: black;
       text-transform: uppercase;
-      background-color: green;
+      background-color: rgb(41, 196, 41);
       text-align: center;
       padding: 15px 0;
       margin-top: 40px;
@@ -247,7 +247,7 @@
       transition: background-color 0.2s;
 
       &:hover {
-        background-color: yellow;
+        background-color: green;
       }
     }
   }
