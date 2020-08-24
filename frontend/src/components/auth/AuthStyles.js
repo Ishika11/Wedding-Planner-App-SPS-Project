@@ -19,6 +19,12 @@ export const useStyles = (theme) => ({
   },
   button: {
     marginLeft: theme.spacing(1),
+    color:'white',
+    fontFamily: "Averia Sans Libre, cursive",
+  },
+  logout_button:{
+    marginLeft: theme.spacing(1),
+    backgroundColor:'rgba(255, 0, 0, 0.5)',
     fontFamily: "Averia Sans Libre, cursive",
   },
 });

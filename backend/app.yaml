@@ -15,6 +15,6 @@
 runtime: nodejs10
 service: server
 env_variables:
-  "DB_PASSWORD": "8Cwt7OOsOBo9k4n6"
+  "DB_PASSWORD": "shejal1730"
   "SECRET_KEY": "my-secret"
 # [END gae_quickstart_yaml]

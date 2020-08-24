@@ -138,7 +138,7 @@ class Auth extends Component {
           color="secondary"
           variant="contained"
           size="x-large"
-          className={classes.button}
+          className={classes.logout_button}
           startIcon={<ExitToApp />}
           onClick={this.logout}
         >

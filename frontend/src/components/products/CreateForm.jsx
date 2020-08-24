@@ -17,6 +17,7 @@ import { LOCATIONS, CATEGORIES } from "./constants";
 import { addService } from "../../actions/service";
 import { Redirect } from "react-router";
 
+
 const CreateProduct = () => {
   let fileInputElement;
 
@@ -60,9 +61,9 @@ const CreateProduct = () => {
   }
 
   return (
-    <Container>
-      <Card>
-        <Grid container>
+    // <Container className="marginTop container-class" >
+      <Card className="container-class bg">
+        <Grid className="level2">
           <Container>
             <CardContent>
               <h1>Describe your Service</h1>
@@ -220,7 +221,7 @@ const CreateProduct = () => {
           </Container>
         </Grid>
       </Card>
-    </Container>
+    // </Container>
   );
 };
 
