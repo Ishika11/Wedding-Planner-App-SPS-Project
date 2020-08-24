@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Thumb from "../../Thumb";
 import Button from "@material-ui/core/Button";
 import util from "../../../Services/util";
-import { Grid } from "@material-ui/core";
 
 const Product = (props) => {
   const product = props.product;
@@ -17,10 +16,7 @@ const Product = (props) => {
 
   // eslint-disable-next-line
   let productInstallment;
-
-  let url;
-  let x;
-  x = product.id;
+  const x = product.id;
 
   if (!!product.installments) {
     const installmentPrice = product.priceEstimate / product.installments;
