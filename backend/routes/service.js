@@ -102,18 +102,21 @@ router.get("/query", function (request, response, next) {
       include: [
         {
           //inculding the location model to filter out based on location field
+          
           model: models.location,
           where: seq(queryString, {
             //filtering by location
             filterBy: ["name"],
           }),
         },
+        {
+          model: models.serviceImage,
+        }
       ],
     })
     .then((result) => {
       //sending the result
       response.status(status.SUCCESS).send(result);
-      next();
     })
     .catch(next);
 });
@@ -125,6 +128,9 @@ router.get("/", function (request, response, next) {
       include: [
         {
           model: models.serviceImage,
+        },
+        {
+          model: models.location,
         },
       ],
     })

@@ -1,3 +1,4 @@
+
 .form-row {
   margin-top: 2rem;
 }
@@ -16,4 +17,17 @@
 
 h1 {
   text-align: center;
+}
+
+.marginTop{
+  margin-top: 2%;
+  height:80%;
+}
+
+.container-class {
+  background-image: url("../images/red.jpg");
+  background-repeat: no-repeat;
+  background-size: 40% 40%;
+  background-position: center;
+  border: 2px  goldenrod;
 }

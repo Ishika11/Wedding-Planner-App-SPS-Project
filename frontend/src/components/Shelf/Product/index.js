@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import ServicePage from "../../products/ServicePage";
-// import CreateForm from '../../products/CreateForm.jsx';
-import Thumb from "../../Thumb";
-import util from "../../../Services/util";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Thumb from '../../Thumb';
+import Button from "@material-ui/core/Button";
+import util from '../../../Services/util';
 
-const Product = (props) => {
+const Product = props => {
+
   const product = props.product;
 
   product.quantity = 1;
@@ -18,10 +18,10 @@ const Product = (props) => {
   // eslint-disable-next-line
   let productInstallment;
 
-  function viewProduct() {
-    console.log(product.id);
-    return <ServicePage id={product.id} />;
-  }
+  let url;
+  let x;
+  x=product.id;
+
   if (!!product.installments) {
     const installmentPrice = product.priceEstimate / product.installments;
 
@@ -50,9 +50,16 @@ const Product = (props) => {
   }
 
   return (
-    <div className="shelf-item">
-      <Thumb classes="shelf-item__thumb" src={imageUrl} alt={product.name} />
-      <button onClick={() => viewProduct()}>View Product</button>
+    <div
+      className="shelf-item"
+    >
+      <Thumb
+        classes="shelf-item__thumb"
+        src={imageUrl}
+        alt={product.name}
+      />  
+      <Button 
+      href={"/service/" + x}>View Product</Button>
       <p className="shelf-item__title">{product.name}</p>
       <div className="shelf-item__price">
         <div className="val">
