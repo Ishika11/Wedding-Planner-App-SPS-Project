@@ -13,10 +13,11 @@ import Chip from "@material-ui/core/Chip";
 import ImagesPreview from "./ImagesPreview";
 import { Grid, Container } from "@material-ui/core";
 import "./CreateForm.css";
+import "./spinner.css";
 import { LOCATIONS, CATEGORIES } from "./constants";
 import { addService } from "../../actions/service";
 import { Redirect } from "react-router";
-
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const CreateProduct = () => {
   let fileInputElement;
@@ -31,6 +32,7 @@ const CreateProduct = () => {
     locations: [],
   });
 
+  const [loading, setLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [images, setImages] = useState([]);
 
@@ -43,6 +45,7 @@ const CreateProduct = () => {
   };
 
   const handleFormSubmit = async (event) => {
+    setLoading(true);
     event.preventDefault();
     const formData = new FormData();
     Object.keys(values).forEach((key) => formData.append(key, values[key]));
@@ -53,6 +56,7 @@ const CreateProduct = () => {
 
     const result = await addService(formData);
     console.log(result);
+    setLoading(false);
     setRedirect(true);
   };
 
@@ -60,167 +64,171 @@ const CreateProduct = () => {
     return <Redirect to="/" />;
   }
 
+  if (loading) {
+    return (
+      <div className="spinner">
+        <CircularProgress color={"secondary"} size={100} />
+      </div>
+    );
+  }
+
   return (
     // <Container className="marginTop container-class" >
-      <Card className="container-class bg">
-        <Grid className="level2">
-          <Container>
-            <CardContent>
-              <h1>Describe your Service</h1>
-              <form onSubmit={handleFormSubmit}>
-                <div className="form-row">
-                  <FormControl fullWidth className="form-control">
-                    <InputLabel id="category-label">
-                      Service Category
-                    </InputLabel>
-                    <Select
-                      labelId="category-label"
-                      id="category"
-                      value={values.category}
-                      onChange={handleChange("category")}
-                      label="Category"
-                    >
-                      {CATEGORIES.map((category) => (
-                        <MenuItem key={category} value={category}>
-                          {category}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </div>
-
-                <div className="form-row">
-                  <TextField
-                    className="form-control"
-                    fullWidth
-                    required
-                    id="name-field"
-                    label="Name your Service"
-                    value={values.name}
-                    onChange={handleChange("name")}
-                  />
-                </div>
-
-                <div className="form-row">
-                  <TextField
-                    className="form-control"
-                    fullWidth
-                    required
-                    id="estimate-unit-field"
-                    label="Unit of measurement"
-                    value={values.estimateUnit}
-                    onChange={handleChange("estimateUnit")}
-                  />
-                </div>
-
-                <div className="form-row">
-                  <FormControl fullWidth className="form-control">
-                    <InputLabel htmlFor="standard-adornment-amount">
-                      Cost per unit
-                    </InputLabel>
-                    <Input
-                      id="price-estimate-field"
-                      value={values.priceEstimate}
-                      onChange={handleChange("priceEstimate")}
-                      startAdornment={
-                        <InputAdornment position="start">₹</InputAdornment>
-                      }
-                    />
-                  </FormControl>
-                </div>
-
-                <div className="form-row">
-                  <TextField
-                    className="form-control"
-                    fullWidth
-                    required
-                    id="description-field"
-                    label="Description"
-                    value={values.description}
-                    multiline
-                    rows={4}
-                    onChange={handleChange("description")}
-                  />
-                </div>
-
-                <div className="form-row">
-                  <TextField
-                    className="form-control"
-                    fullWidth
-                    required
-                    id="contact-field"
-                    label="Contact number"
-                    value={values.contactNumber}
-                    onChange={handleChange("contactNumber")}
-                  />
-                </div>
-
-                <div className="form-row">
-                  <FormControl fullWidth className="form-control">
-                    <InputLabel id="location-label">
-                      Service Locations
-                    </InputLabel>
-                    <Select
-                      labelId="location-label"
-                      id="mutiple-location"
-                      multiple
-                      value={values.locations}
-                      onChange={handleChange("locations")}
-                      input={<Input id="select-multiple-locations" />}
-                      renderValue={(selected) => (
-                        <div className="chips">
-                          {selected.map((value) => (
-                            <Chip key={value} label={value} className="chip" />
-                          ))}
-                        </div>
-                      )}
-                    >
-                      {LOCATIONS.map((locationName) => (
-                        <MenuItem key={locationName} value={locationName}>
-                          {locationName}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </div>
-
-                <div className="form-row">
-                  <ImagesPreview images={images} />
-                </div>
-
-                <div className="form-row">
-                  <FormControl fullWidth>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      ref={(fileInput) => (fileInputElement = fileInput)}
-                      multiple
-                      hidden
-                      onChange={handleFilesChange}
-                    />
-                  </FormControl>
-                </div>
-
-                <div className="form-row center">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => fileInputElement.click()}
+    <Card className="container-class bg">
+      <Grid className="level2">
+        <Container>
+          <CardContent>
+            <h1>Describe your Service</h1>
+            <form onSubmit={handleFormSubmit}>
+              <div className="form-row">
+                <FormControl fullWidth className="form-control">
+                  <InputLabel id="category-label">Service Category</InputLabel>
+                  <Select
+                    labelId="category-label"
+                    id="category"
+                    value={values.category}
+                    onChange={handleChange("category")}
+                    label="Category"
                   >
-                    Add Images
-                  </Button>
-                </div>
+                    {CATEGORIES.map((category) => (
+                      <MenuItem key={category} value={category}>
+                        {category}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </div>
 
-                <div className="form-row center">
-                  <Button variant="contained" color="primary" type="submit">
-                    Submit
-                  </Button>
-                </div>
-              </form>
-            </CardContent>
-          </Container>
-        </Grid>
-      </Card>
+              <div className="form-row">
+                <TextField
+                  className="form-control"
+                  fullWidth
+                  required
+                  id="name-field"
+                  label="Name your Service"
+                  value={values.name}
+                  onChange={handleChange("name")}
+                />
+              </div>
+
+              <div className="form-row">
+                <TextField
+                  className="form-control"
+                  fullWidth
+                  required
+                  id="estimate-unit-field"
+                  label="Unit of measurement"
+                  value={values.estimateUnit}
+                  onChange={handleChange("estimateUnit")}
+                />
+              </div>
+
+              <div className="form-row">
+                <FormControl fullWidth className="form-control">
+                  <InputLabel htmlFor="standard-adornment-amount">
+                    Cost per unit
+                  </InputLabel>
+                  <Input
+                    id="price-estimate-field"
+                    value={values.priceEstimate}
+                    onChange={handleChange("priceEstimate")}
+                    startAdornment={
+                      <InputAdornment position="start">₹</InputAdornment>
+                    }
+                  />
+                </FormControl>
+              </div>
+
+              <div className="form-row">
+                <TextField
+                  className="form-control"
+                  fullWidth
+                  required
+                  id="description-field"
+                  label="Description"
+                  value={values.description}
+                  multiline
+                  rows={4}
+                  onChange={handleChange("description")}
+                />
+              </div>
+
+              <div className="form-row">
+                <TextField
+                  className="form-control"
+                  fullWidth
+                  required
+                  id="contact-field"
+                  label="Contact number"
+                  value={values.contactNumber}
+                  onChange={handleChange("contactNumber")}
+                />
+              </div>
+
+              <div className="form-row">
+                <FormControl fullWidth className="form-control">
+                  <InputLabel id="location-label">Service Locations</InputLabel>
+                  <Select
+                    labelId="location-label"
+                    id="mutiple-location"
+                    multiple
+                    value={values.locations}
+                    onChange={handleChange("locations")}
+                    input={<Input id="select-multiple-locations" />}
+                    renderValue={(selected) => (
+                      <div className="chips">
+                        {selected.map((value) => (
+                          <Chip key={value} label={value} className="chip" />
+                        ))}
+                      </div>
+                    )}
+                  >
+                    {LOCATIONS.map((locationName) => (
+                      <MenuItem key={locationName} value={locationName}>
+                        {locationName}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </div>
+
+              <div className="form-row">
+                <ImagesPreview images={images} />
+              </div>
+
+              <div className="form-row">
+                <FormControl fullWidth>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    ref={(fileInput) => (fileInputElement = fileInput)}
+                    multiple
+                    hidden
+                    onChange={handleFilesChange}
+                  />
+                </FormControl>
+              </div>
+
+              <div className="form-row center">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => fileInputElement.click()}
+                >
+                  Add Images
+                </Button>
+              </div>
+
+              <div className="form-row center">
+                <Button variant="contained" color="primary" type="submit">
+                  Submit
+                </Button>
+              </div>
+            </form>
+          </CardContent>
+        </Container>
+      </Grid>
+    </Card>
     // </Container>
   );
 };

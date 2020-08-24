@@ -8,25 +8,28 @@ class Home extends Component {
     return (
       <div>
         <img src={shaadiimage} style={{ width: "100%" }} alt="shaadi"></img>
-        <Typography variant="h4">
-          <a
-            style={{ color: "white", textDecoration: "none" }}
-            class="text centered"
-            href="/"
-          >
-            EaseOurशादी
-          </a>
-        </Typography>
+        <div>
+          <Typography variant="h4">
+            <a
+              style={{ color: "white", textDecoration: "none" }}
+              className="text centered"
+              href="/"
+            >
+              EaseOurशादी
+            </a>
+          </Typography>
+        </div>
 
-        <p className="description">
+        <div class="description">
+          <p />
           Marriage is special occasion. It's a bond formed by two people. Make
-          it timeless and effortless.{" "}
-        </p>
-        <p className="description2">
+          it timeless and effortless.
+          <p />
           Browse through all the services in the shop and get the best and most
           cost efficient in your locality.
-        </p>
-        <p className="description3">Make your marriage momentous.</p>
+          <p />
+          Make your marriage momentous.
+        </div>
       </div>
     );
   }

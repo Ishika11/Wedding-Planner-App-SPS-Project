@@ -2,7 +2,6 @@
   width: 85%;
   float: left;
   min-height: 600px;
-  
 
   &-header {
     margin-bottom: 10px;
@@ -76,7 +75,7 @@
       height: 45px;
 
       &::before {
-        content: '';
+        content: "";
         width: 20px;
         height: 2px;
         background-color: #eabf00;
@@ -113,11 +112,11 @@
   }
 }
 
-.container{
+.container {
   background-image: url("../images/bg.jpg");
   // background-repeat: no-repeat;
   // color: indianred;
   /* background-position: center; */
-  width:100%;
-  border: 2px  goldenrod;
+  width: 100%;
+  border: 2px goldenrod;
 }

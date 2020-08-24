@@ -10,10 +10,13 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 import { useParams } from "react-router-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import "./spinner.css";
 
 const ServicePage = () => {
   const id = useParams().id;
   const [service, setService] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const makeLocationString = (locations) =>
     locations.map((location) => location.name).join(", ");
@@ -23,12 +26,18 @@ const ServicePage = () => {
       const serviceData = data.service;
       serviceData.locations = makeLocationString(serviceData.locations);
       setService(serviceData);
+      setLoading(false);
     });
   }, [id]);
 
-  return service === null ? (
-    ""
-  ) : (
+  if (!service || loading) {
+    return (
+      <div className="spinner">
+        <CircularProgress color={"secondary"} size={100} />
+      </div>
+    );
+  }
+  return (
     <Container style={{ marginTop: "5%" }}>
       <Grid container spacing={4}>
         <Grid item sm={12} md={4}>
