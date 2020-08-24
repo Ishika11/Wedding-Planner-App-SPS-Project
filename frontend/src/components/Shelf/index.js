@@ -14,6 +14,7 @@ import "../Filter/dropdown.scss"
 import { Container } from '@material-ui/core';
 
 
+
 //List of all the available services.
 const categoryList = [
    "Entertainment",
@@ -99,6 +100,7 @@ class Shelf extends Component {
 
     //the base URL for the filter API
     let url = `${baseUrl}api/service/query?`;
+    var iterator;
 
     //Constructing the URL from the user selected set of locations.
     if(locationValue){
@@ -106,29 +108,10 @@ class Shelf extends Component {
       sizeOfLocationArray=locationValue.length;
       if (sizeOfLocationArray!==0) {
         //If user selects only one location
-        if(sizeOfLocationArray===1){
-            url+='name=';
-            url+=locationValue[0];
-            url+='&';
-        }
-
-        //If user selects multiple locations
-        else{
-            for(var iterator=0;iterator<sizeOfLocationArray-1;iterator++){
-                if(iterator===0){
-                    url+='name=';
-                    url+=locationValue[iterator];
-                    url+=',';
-                }
-                else{
-                url+=locationValue[iterator];
-                url+=',';
-                }
-            } 
-            //Appending the last location to URL
-            url+=locationValue[sizeOfLocationArray-1];
-            url+='&'
-          }
+        url+='name=';
+        url+=locationValue.join();
+        url+='&';
+       
         }
     }
 
@@ -176,7 +159,7 @@ class Shelf extends Component {
     if (maxPrice) {
       url = `${url}maxPrice=${maxPrice}&`;
     }
-
+    console.log(url);
     //Calling GET API to fetch the services
     fetch(url, {
       method: "GET",
@@ -237,8 +220,8 @@ class Shelf extends Component {
     });
 
     return (
-      <Container>
-        <div>
+      <Container  >
+        <div className="conatiner">
           {/* Form to take minimum and maximum price as input from user */}
           <form>
             <div>

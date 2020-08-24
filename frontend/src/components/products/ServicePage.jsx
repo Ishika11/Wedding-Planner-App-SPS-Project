@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { getService } from "../../actions/service";
 import { useEffect } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Container } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import ImageCarousel from "./ImageCarousel";
 import Table from "@material-ui/core/Table";
@@ -31,6 +31,7 @@ const ServicePage = () => {
   return service === null ? (
     ""
   ) : (
+    <Container style={{marginTop:'5%'}}>
     <Grid container spacing={4}>
       <Grid item sm={12} md={4}>
         {service.serviceImages ? (
@@ -38,9 +39,6 @@ const ServicePage = () => {
         ) : (
           ""
         )}
-        <Button fullWidth variant="contained" color="primary">
-          <ShoppingCartIcon /> Add to Cart
-        </Button>
       </Grid>
       <Grid item sm={12} md={8} component={Paper}>
         <TableContainer>
@@ -86,6 +84,7 @@ const ServicePage = () => {
         </TableContainer>
       </Grid>
     </Grid>
+    </Container>
   );
 };
 

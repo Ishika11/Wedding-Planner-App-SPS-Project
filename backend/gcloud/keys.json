@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "abal-sps-summer20",
+    "private_key_id": "30b729fb75af98ca798370a681a49664f638a00e",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCqC7Wx41Q0jFTW\nubQU4pfkG3uOGAXyOSGPWbUWyACHfKEiX4NnonwvDiAMB8J8JYh/zUmSwJE8jmft\ngeXfHmuozFU0rPt4DUrP6CxGsgN3uOknB5GiNFohhOzuPIbsKjntzR+Y3mA/xD75\ndhXDaQ1FDfYHQKXgqd7sdy6LyMThFcRlHAZQrOMZpmFAC+YT3vfsEBrfXXUkUCy6\nk77v6xz1wxO3FPLNPdVW5OBki0Csc8CNHAZJ9zuUPznlc42JuSMAm6wXrKM95Vq+\nUBLHSlAps+olaB9HMNj27mfV7g1SneMLBlwuu3FGa0Uef0EGvh/i0Peblx9UXzsg\nE31+QTCnAgMBAAECggEAGD6TKUnAN73KWtMfWdr0zREeDKRgNKjwn/+qUhUx/h9G\n2h/EHIKOMidRamWw1QKE87PRSZsrGfcz2ikrHSS5NNftThVbxUIf6ISxy2KWG/vB\nQk9R9E6Ci0Togw8eLY3XtJAKcUFDd9QDJo4vjCzuN2pGKcKN4/pUTmKvwD5f07eK\n/iopxrlM03Ggr35iM3p0LUdkxqM0rlo6nrwXXSCb9WlnkXZZkm6jZHf8FYaMID8p\n/jm7s+mtCasS90A458VUvGiF31perebylSYduLfzhbTOXRg5wPuQbILVGx4FAqzJ\nBtFGE0zabHXWIikqQdSauoFWohFNV+kBC8eQzp9EAQKBgQDmhdl6VGChp6YCUqMy\nIa9IJqN/NFLsGLHxYaslhf0VG8lBLt63x+XE9/qh1B6QITCLuPwt0FzMoARYzyzR\n00q0f5S5L2yAiK5fw+0ceUyVNsAQgogZWyukVtrYZAEbpQRR7dAW99di8PE/6SUM\nT4h3Ahh3793QZ4gepmAm5EOmiwKBgQC81so4PDatzvmurW87WNpvjzB/OppxxRKW\nt9kW+C1X59s4XxA6x7/LdraA0vuMaaNdOpj/jZ7KepVF2GF3/J3erPAXg2wGbSuR\n4Sl1dbnjV4vZJVMfiF4nQN0o7QScnjVNEfiMGlFE3408qRj9LnlCw+WeQy19I3X9\nOJaAE2m91QKBgQC+mnWTfCjaAPB2gzWEwe1YTvpoty7JIDIhT4xfXkZAKdViHArz\nEkmdbxzAqc8LhSXKoY2BpALW/ogZllOMupPOYp7p75hbPqhPboSjQnhb+AUeoY8+\nx+9x1o7k1OtFnE/SHjwsgYiJuob/PRrw7uH65LSulpplMvWNwitGfP6iuQKBgG30\nYyr7ZJsvuRKMyge0ZPwwU/zBEszMA1bfFfjZ6Q0WY/8e20Reqr6+EOZR80Z+/DB8\nvjmPLLaZSfGxXI+Q+BuAdww56dyUFJqMkKdkNSi7ASMfKJdjv+77RctetyC6vi5y\nGFb7u/ZudL6td290cAcAKeNNGl+TFlCrcnaA10FBAoGBAJ+LNNARPNBTXbH+KHDk\n7naI+9kZXDJfRrXXf2ZcZfVTjDcQRC1eDXGq4T0oMUzb6fP/xwZeFBcphPeIUiSn\nE9aYiBgipE04vYUgiGJm2gXIXWJtOxb4LTVsQiKHapcrmOiHA3a/SJ++ikJ6n4lA\now8cddA4lsM5xW6mNHskE3Pl\n-----END PRIVATE KEY-----\n",
+    "client_email": "sps-project-104@abal-sps-summer20.iam.gserviceaccount.com",
+    "client_id": "116296232495154153462",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sps-project-104%40abal-sps-summer20.iam.gserviceaccount.com"
+}
