@@ -6,11 +6,15 @@ import util from '../../../Services/util';
 import { Grid } from '@material-ui/core';
 
 const Product = props => {
+
   const product = props.product;
-  
+
   product.quantity = 1;
 
-  let formattedPrice = util.formatPrice(product.priceEstimate, product.currencyId);
+  let formattedPrice = util.formatPrice(
+    product.priceEstimate,
+    product.currencyId
+  );
 
   // eslint-disable-next-line
   let productInstallment;
@@ -26,29 +30,25 @@ const Product = props => {
       <div className="installment">
         <span>or {product.installments} x</span>
         <b>
-          {' '}
-          {product.currencyFormat}{' '}
+          {" "}
+          {product.currencyFormat}{" "}
           {util.formatPrice(installmentPrice, product.currencyId)}
         </b>
       </div>
     );
   }
-    var size;
-    var imageUrl;
-    if(typeof product.serviceImages !== 'undefined'){
-      size=product.serviceImages.length;
-    }
-    else{
-      size=0;
-    }
-    if(size===0){
-      imageUrl="https://i.postimg.cc/fLSfSqsK/105-1.jpg";
-    }
-    else{
-      imageUrl='';
-      imageUrl+='http://localhost:4000/';
-      imageUrl+=product.serviceImages[0].url;
-    }
+  var size;
+  var imageUrl;
+  if (typeof product.serviceImages !== "undefined") {
+    size = product.serviceImages.length;
+  } else {
+    size = 0;
+  }
+  if (size === 0) {
+    imageUrl = "https://i.postimg.cc/fLSfSqsK/105-1.jpg";
+  } else {
+    imageUrl = product.serviceImages[0].url;
+  }
 
   return (
     <div
@@ -84,7 +84,7 @@ const Product = props => {
 
 Product.propTypes = {
   product: PropTypes.object.isRequired,
-  addProduct: PropTypes.func.isRequired
+  addProduct: PropTypes.func.isRequired,
 };
 
 export default Product;
