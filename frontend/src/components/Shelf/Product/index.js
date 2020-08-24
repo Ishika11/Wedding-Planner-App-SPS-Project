@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Thumb from '../../Thumb';
 import Button from "@material-ui/core/Button";
 import util from '../../../Services/util';
+import { Grid } from '@material-ui/core';
 
 const Product = props => {
   const product = props.product;
@@ -53,11 +54,14 @@ const Product = props => {
     <div
       className="shelf-item"
     >
+      <div style={{height:'0px',widht:'0px'}}>
       <Thumb
         classes="shelf-item__thumb"
         src={imageUrl}
         alt={product.name}
-      />  
+      />   
+      </div>
+      <div style={{marginTop:'80%'}}>
       <Button 
       href={"/service/" + x}>View Product</Button>
       <p className="shelf-item__title">{product.name}</p>
@@ -66,12 +70,14 @@ const Product = props => {
           <small>INR</small>
           <b>{formattedPrice.substr(0, formattedPrice.length - 3)}</b>
           <span>{formattedPrice.substr(formattedPrice.length - 3, 3)}</span>
+          <span>  {product.estimateUnit}</span>
         </div>
       </div>
       <div 
       className="shelf-item__buy-btn"
       onClick={() => props.addProduct(product)}
       >Add to cart</div>
+      </div>
     </div>
   );
 };
