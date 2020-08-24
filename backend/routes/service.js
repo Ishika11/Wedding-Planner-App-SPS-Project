@@ -95,10 +95,10 @@ router.get("/query", function (request, response, next) {
           },
         },
       ],
-      // order: seq(queryString, {
-      //   //ASC for asscending and DESC for descending
-      //   orderBy: ["priceEstimate"],
-      // }),
+      order: seq(queryString, {
+        //ASC for asscending and DESC for descending
+        orderBy: ["priceEstimate"],
+      }),
       include: [
         {
           //inculding the location model to filter out based on location field
