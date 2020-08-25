@@ -10,7 +10,7 @@ const Review = ({ reviewData }) => {
         <h2 style={{ marginLeft: 3 }}>{reviewData.title}</h2>
       </div>
       <p style={{ fontSize: 20 }}>{reviewData.description}</p>
-      <p style={{ fontSize: 15 }}>{`${
+      <p style={{ fontSize: 15, color: "grey" }}>{`${
         reviewData.creator_email
       } on ${createdAt.toString()}`}</p>
     </Fragment>
