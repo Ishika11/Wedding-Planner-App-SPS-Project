@@ -32,20 +32,15 @@ class CartProduct extends Component {
     }
     var size;
     var imageUrl;
-    if(typeof serviceImages!=='undefined'){
-      size=product.serviceImages.length;
+    if (typeof product.serviceImages !== "undefined") {
+      size = product.serviceImages.length;
+    } else {
+      size = 0;
     }
-    else{
-      size=0;
-    }
-    if(size===0){
-      imageUrl="https://i.postimg.cc/fLSfSqsK/105-1.jpg";
-    }
-    else{
-      imageUrl='';
-      imageUrl+='http://localhost:4000/';
-      imageUrl+=product.serviceImages[0].url;
-      // console.log(imageUrl);
+    if (size === 0) {
+      imageUrl = "https://i.postimg.cc/fLSfSqsK/105-1.jpg";
+    } else {
+      imageUrl = product.serviceImages[0].url;
     }
     return (
       <div className={classes.join(' ')}>
