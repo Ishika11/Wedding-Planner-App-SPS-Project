@@ -1,10 +1,11 @@
 const path = require("path");
 const serviceRoutes = require("./routes/service");
-const express = require('express');
-const bodyParser = require('body-parser');
-const pingRoutes = require('./routes/ping');
-const auth = require('./routes/auth.js');
-var cors = require('cors');
+const express = require("express");
+const bodyParser = require("body-parser");
+const pingRoutes = require("./routes/ping");
+const reviewRoutes = require("./routes/review");
+const auth = require("./routes/auth.js");
+var cors = require("cors");
 
 const app = express();
 
@@ -15,9 +16,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 var corsOption = {
   origin: true,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
-  exposedHeaders: ['x-auth-token']
+  exposedHeaders: ["x-auth-token"],
 };
 app.use(cors(corsOption));
 
@@ -27,6 +28,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use("/api/ping", pingRoutes);
 app.use("/api/service", serviceRoutes);
-app.use('/api/v1/auth', auth);
+app.use("/api/v1/auth", auth);
+app.use("/api/review", reviewRoutes);
 
 module.exports = app;
