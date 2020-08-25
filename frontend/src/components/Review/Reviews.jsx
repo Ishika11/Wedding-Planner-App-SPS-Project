@@ -28,14 +28,18 @@ const Reviews = ({ serviceId }) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
-    await addReview(values);
-    setValues({
-      rating: 2,
-      title: "",
-      description: "",
-      serviceId: "",
+    addReview(values).then(() => {
+      setValues({
+        rating: 2,
+        title: "",
+        description: "",
+        serviceId: "",
+      });
+      getReviews(serviceId).then((reviews) => {
+        setReviews(reviews);
+      });
     });
   };
 
