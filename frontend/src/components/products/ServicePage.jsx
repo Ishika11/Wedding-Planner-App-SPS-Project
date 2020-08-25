@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getService } from "../../actions/service";
-import { useEffect } from "react";
 import { Grid, Container } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import ImageCarousel from "./ImageCarousel";
@@ -90,7 +89,7 @@ const ServicePage = () => {
               </TableBody>
             </Table>
           </TableContainer>
-          <Reviews service_id={id} />
+          <Reviews serviceId={id} />
         </Grid>
       </Grid>
     </Container>

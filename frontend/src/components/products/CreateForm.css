@@ -2,6 +2,10 @@
   margin-top: 2rem;
 }
 
+.last-row {
+  margin-bottom: 3rem;
+}
+
 .chips {
   display: "flex";
 }

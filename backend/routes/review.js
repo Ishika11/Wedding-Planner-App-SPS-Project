@@ -10,7 +10,7 @@ router.post("", checkAuth, async (req, res) => {
       rating: body.rating,
       title: body.title,
       description: body.description,
-      serviceId: body.service_id,
+      serviceId: body.serviceId,
       creator_email: user,
     });
   } catch {
