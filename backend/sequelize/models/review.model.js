@@ -11,7 +11,7 @@ module.exports = (db) => {
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     creator_email: {
