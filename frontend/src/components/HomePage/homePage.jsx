@@ -7,7 +7,11 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <img src={shaadiimage} style={{ width: "100%" }} alt="shaadi"></img>
+        <img
+          src={shaadiimage}
+          style={{ width: "100%", height: "100%" }}
+          alt="shaadi"
+        ></img>
         <div>
           <Typography variant="h4">
             <a
