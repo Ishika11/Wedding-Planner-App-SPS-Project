@@ -26,7 +26,6 @@ router.post("", checkAuth, extractFiles, renameFiles, async (req, res) => {
   });
 
   const imageUrls = await Promise.all(files.map((file) => uploadImage(file)));
-  console.log(imageUrls);
   await Promise.all(
     imageUrls.map((imageUrl) =>
       newService.createServiceImage({ url: imageUrl })
@@ -102,7 +101,7 @@ router.get("/query", function (request, response, next) {
       include: [
         {
           //inculding the location model to filter out based on location field
-          
+
           model: models.location,
           where: seq(queryString, {
             //filtering by location
@@ -111,7 +110,7 @@ router.get("/query", function (request, response, next) {
         },
         {
           model: models.serviceImage,
-        }
+        },
       ],
     })
     .then((result) => {
