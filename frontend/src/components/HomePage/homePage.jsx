@@ -20,7 +20,7 @@ class Home extends Component {
           </Typography>
         </div>
 
-        <div class="description">
+        <div className="description">
           <p />
           Marriage is special occasion. It's a bond formed by two people. Make
           it timeless and effortless.

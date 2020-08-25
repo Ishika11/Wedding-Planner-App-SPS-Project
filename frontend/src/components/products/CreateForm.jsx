@@ -56,7 +56,6 @@ const CreateProduct = () => {
 
     const result = await addService(formData);
     console.log(result);
-    setLoading(false);
     setRedirect(true);
   };
 

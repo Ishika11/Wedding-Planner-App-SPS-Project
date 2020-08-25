@@ -11,6 +11,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 import { useParams } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Reviews from "./Reviews";
 import "./spinner.css";
 
 const ServicePage = () => {
@@ -47,8 +48,8 @@ const ServicePage = () => {
             ""
           )}
         </Grid>
-        <Grid item sm={12} md={8} component={Paper}>
-          <TableContainer>
+        <Grid item sm={12} md={8}>
+          <TableContainer component={Paper}>
             <h1>{service.name}</h1>
             <Table>
               <TableBody>
@@ -89,6 +90,7 @@ const ServicePage = () => {
               </TableBody>
             </Table>
           </TableContainer>
+          <Reviews />
         </Grid>
       </Grid>
     </Container>
