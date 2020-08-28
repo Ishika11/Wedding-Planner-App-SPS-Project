@@ -2,7 +2,7 @@ const { Sequelize } = require("sequelize");
 const { applyAssociations } = require("./associations");
 
 const db = new Sequelize(
-  `mysql://root:${process.env.DB_PASSWORD}@34.93.213.92:3306/wedding_planner`
+  `mysql://root:${process.env.DB_PASSWORD}@104.197.89.58:3306/sps_project`
 );
 
 const modelDefiners = [

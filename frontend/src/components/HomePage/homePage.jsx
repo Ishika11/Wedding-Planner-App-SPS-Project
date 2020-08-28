@@ -9,7 +9,7 @@ class Home extends Component {
       <div>
         <img
           src={shaadiimage}
-          style={{ width: "100%", height: "100%" }}
+          className="image-size"
           alt="shaadi"
         ></img>
         <div>
@@ -26,8 +26,8 @@ class Home extends Component {
 
         <div className="description">
           <p />
-          Marriage is special occasion. It's a bond formed by two people. Make
-          it timeless and effortless.
+          Marriage is a special occasion. It's a bond formed by two people. Make
+          it timeless and effortless with us.
           <p />
           Browse through all the services in the shop and get the best and most
           cost efficient in your locality.

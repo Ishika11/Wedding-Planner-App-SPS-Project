@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 import { loadCart, removeProduct } from '../../Services/cart/actions';
 import { updateCart } from '../../Services/total/actions';
 import CartProduct from './CartProduct';
 import util from '../../Services/util';
-
 import './style.scss';
 
 class FloatCart extends Component {

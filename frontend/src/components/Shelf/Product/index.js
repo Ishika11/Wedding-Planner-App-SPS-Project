@@ -6,32 +6,12 @@ import util from "../../../Services/util";
 
 const Product = (props) => {
   const product = props.product;
-
   product.quantity = 1;
-
   let formattedPrice = util.formatPrice(
     product.priceEstimate,
     product.currencyId
   );
-
-  // eslint-disable-next-line
-  let productInstallment;
   const x = product.id;
-
-  if (!!product.installments) {
-    const installmentPrice = product.priceEstimate / product.installments;
-
-    productInstallment = (
-      <div className="installment">
-        <span>or {product.installments} x</span>
-        <b>
-          {" "}
-          {product.currencyFormat}{" "}
-          {util.formatPrice(installmentPrice, product.currencyId)}
-        </b>
-      </div>
-    );
-  }
   var size;
   var imageUrl;
   if (typeof product.serviceImages !== "undefined") {
@@ -40,7 +20,7 @@ const Product = (props) => {
     size = 0;
   }
   if (size === 0) {
-    imageUrl = "https://i.postimg.cc/fLSfSqsK/105-1.jpg";
+    imageUrl = "https://ibb.co/Zfy3RQP";
   } else {
     imageUrl = product.serviceImages[0].url;
   }

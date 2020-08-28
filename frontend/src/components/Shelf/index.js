@@ -13,8 +13,6 @@ import './style.scss';
 import "../Filter/dropdown.scss"
 import { Container } from '@material-ui/core';
 
-
-
 //List of all the available services.
 const categoryList = [
    "Entertainment",
@@ -39,6 +37,7 @@ const locationList = [
   "Kolkata",
   "Chandigarh",
 ];
+
 class Shelf extends Component {
   /**
    * @returns {void}
@@ -100,18 +99,16 @@ class Shelf extends Component {
 
     //the base URL for the filter API
     let url = `${baseUrl}api/service/query?`;
-    var iterator;
 
     //Constructing the URL from the user selected set of locations.
     if(locationValue){
       var sizeOfLocationArray;
       sizeOfLocationArray=locationValue.length;
+      //if user selects some locations
       if (sizeOfLocationArray!==0) {
-        //If user selects only one location
         url+='name=';
         url+=locationValue.join();
         url+='&';
-       
         }
     }
 
@@ -119,31 +116,12 @@ class Shelf extends Component {
     if(categoryValue){
       var sizeOfCategoryArray;
       sizeOfCategoryArray=categoryValue.length;
+      //if user selects some type of services
       if (sizeOfCategoryArray!==0) {
         //If user selects only one service
-        if(sizeOfCategoryArray===1){
-            url+='category=';
-            url+=categoryValue[0];
-            url+='&';
-        }
-
-        //If user selects multiple services
-        else{
-            for(iterator=0;iterator<sizeOfCategoryArray-1;iterator++){
-                if(iterator===0){
-                    url+='category=';
-                    url+=categoryValue[iterator];
-                    url+=',';
-                }
-                else{
-                url+=categoryValue[iterator];
-                url+=',';
-                }
-            } 
-            //Appending the last service to URL
-            url+=categoryValue[sizeOfCategoryArray-1];
-            url+='&'
-        }
+        url+='category=';
+        url+=categoryValue.join();
+        url+='&';
       }
     }
     
@@ -159,7 +137,7 @@ class Shelf extends Component {
     if (maxPrice) {
       url = `${url}maxPrice=${maxPrice}&`;
     }
-    console.log(url);
+    
     //Calling GET API to fetch the services
     fetch(url, {
       method: "GET",

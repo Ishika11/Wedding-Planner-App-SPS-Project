@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import Thumb from './../../Thumb';
 import util from '../../../Services/util';
 
@@ -38,7 +37,7 @@ class CartProduct extends Component {
       size = 0;
     }
     if (size === 0) {
-      imageUrl = "https://i.postimg.cc/fLSfSqsK/105-1.jpg";
+      imageUrl = "https://ibb.co/Zfy3RQP";
     } else {
       imageUrl = product.serviceImages[0].url;
     }

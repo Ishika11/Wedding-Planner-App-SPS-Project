@@ -58,7 +58,6 @@ router.get("/query", function (request, response, next) {
 
   // Split into key/value pairs
   queries = queryString.split("&");
-  console.log(queries);
 
   // Get the values of minimum and maximum price
   for (i = 0, l = queries.length; i < l; i++) {
